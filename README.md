@@ -1,2 +1,2 @@
 # LinguagemC
-Projetos em C, principalmente para matéria de Algoritmos computacionais na FAETERJ.
+Projetos em C, principalmente para matéria de Fundamentos de Algoritmos Computacionais na FAETERJ.
