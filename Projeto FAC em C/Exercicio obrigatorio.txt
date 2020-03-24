@@ -1,0 +1,215 @@
+INSTITUIÇÃO:  FAETERJ – Faculdade de Educação Tecnológica do Estado do Rio de Janeiro
+
+
+
+
+
+CURSO:  Graduação Tecnológica em Análise e Desenvolvimento de Sistemas
+
+DISCIPLINA:  Fundamentos de Algoritmos de Computacionais
+
+ATIVIDADE:  Faça os programas em C atendendo os exercícios propostos.
+
+
+
+
+
+
+
+DISCENTE: Gilmar Ribeiro Santana
+
+MATRÍCULA:  2010478300064
+
+TURNO: NOITE
+
+
+
+
+################################################################################################
+Faça um programa que leia o número de dias decorrido em um evento e exiba na tela o mesmo valor 
+expresso em números de semanas e número de dias. 
+Por exemplo, se um usuário fornecer o valor 19, o programa deve exibir: “2 semanas e 5 dias”.
+################################################################################################
+
+/* 
+ * Atividades disciplina Fundamentos de Algoritmos Computacionais.
+ * Autor: Gilmar Ribeiro Santana
+ * Data: 23-03-2020
+ *
+ */
+#include <stdio.h>
+
+int main(void){
+
+    int diaEvento, dia, semana;
+
+//Cabeçalho. Nome da instituição. 
+    printf("\n");
+    printf("\n");
+    printf("*****   *   ***** ***** ***** *****  ****\n");
+    printf("*      * *  *       *   *     *   *    * \n");
+    printf("*     *   * *       *   *     *   *    * \n");
+    printf("****  ***** ****    *   ****  *****    * \n");
+    printf("*     *   * *       *   *     *  *  *  * \n");
+    printf("*     *   * *       *   *     *   * * *  \n");
+    printf("*     *   * *****   *   ***** *   *  *   \n");
+
+//Cabeçalho da atividade.
+    printf("\n\n******************************************************************************************\n\n");
+    printf("Receba a quantidade de dias de duração do evento e entregue o resultado em dias e semanas.");
+    printf("\n\n******************************************************************************************\n");
+
+//Início do código.
+//Recebe a quantidade de dias do evento.
+    printf("\nQuantos dias durou o evento?\n");
+    scanf("%d", &diaEvento);
+//Resolve a quantidade de semanas.
+    semana = diaEvento / 7;
+//Resolve a quantidade de dias
+    dia = diaEvento % 7;
+//Condiciona as respostas apresentadas de acordo com o ajuste de dias e semanas.
+    if(dia == 0){
+        printf("\nO evento durou %d semana(s).\n", semana);
+        }else if(semana < 1){
+            printf("\nO evento durou %d dia(s).\n", dia);
+        }else{
+        printf("\nO evento durou %d semana(s) e %d dia(s).\n", semana, dia);
+        }
+   
+
+   return 0;
+}
+
+
+
+
+#######################################################################################################
+Faça um programa que informe a um vendedor ambulante quantos litros de refresco, quantos litros de 
+suco podem ser produzidos a partir de um concentrado  bem como quanto irá receber, caso venda 1 copo 
+de  suco a R$2,00 e um copo de refresco a R$1,00. O vendedor deve fornecer  a litragem do concentrado. 
+
+Obs. Sabe-se que a proporção de suco é 1 de concentrado para 2 de água e a do refresco é de 
+1 de concentrado para 4 de água e cada copo tem 100 ml.
+Exemplo: 1l de concentrado  produz 3l de suco e 5l de refresco e renderá R$ 110,00 (60,00 + 50,00)
+#######################################################################################################
+
+/* 
+ * Atividades disciplina Fundamentos de Algoritmos Computacionais.
+ * Autor: Gilmar Ribeiro Santana
+ * Data: 23-03-2020
+ *
+ */
+#include <stdio.h>
+
+int main(void){
+
+    float concentrado, refresco, suco;
+    float vlrSuco, vlrRefresco;
+
+//Cabeçalho. Nome da instituição. 
+    printf("\n");
+    printf("\n");
+    printf("*****   *   ***** ***** ***** *****  ****\n");
+    printf("*      * *  *       *   *     *   *    * \n");
+    printf("*     *   * *       *   *     *   *    * \n");
+    printf("****  ***** ****    *   ****  *****    * \n");
+    printf("*     *   * *       *   *     *  *  *  * \n");
+    printf("*     *   * *       *   *     *   * * *  \n");
+    printf("*     *   * *****   *   ***** *   *  *   \n");
+
+//Cabeçalho da atividade.
+    printf("\n\n**********************************************************************************************\n\n");
+    printf("Receba a quantidade de concentrado e entregue o rendimento e o faturamento de suco e refresco.");
+    printf("\n\n**********************************************************************************************\n");
+
+//Início do código.
+
+//Recebe a quantidade de concentrado em litros. Admite quantidade fracionada.
+    printf("\nQual a quantidade de concentrado? (em litros)\n");
+    scanf("%f", &concentrado);
+
+    refresco = concentrado * 5.0; //Rendimento refresco = 1pt concentrado p/ 4pt água.
+    suco = concentrado * 3.0; //Rendimento suco = 1pt concentrado p/ 2pt água.
+
+    vlrRefresco = (refresco * 1.00) * 10.0; //Valor refresco R$1,00 copo 100ml.
+    vlrSuco = (suco * 2.00) * 10.0; //Valor suco R$ 2,00 copo 100ml.
+
+//Entrega resultado com qtd de suco, refresco e o faturamento de cada um.
+    printf("\n%.2f litro(s) de concentrado produz %.2f litros de refresco faturando R$%.2f ", concentrado, refresco, vlrRefresco);
+    printf("\nou\n");
+    printf("%.2f litro(s) de concentrado produz %.2f litros de suco faturando R$%.2f\n\n", concentrado, suco, vlrSuco);
+
+    return 0;
+}
+
+
+#################################################################################################
+Faça um programa para mostrar o valor total a pagar por um produto em promoção. 
+O valor básico do produto e percentual de desconto são obtidos do código do produto que possui 4 
+algarismos de acordo com a seguinte regra: 
+Código do produto: xxyy
+ Preço básico: XX*15,00 + YY
+ Percentual de desconto: YY 
+
+Por exemplo: código do produto: 2314
+Preço : 23*15,00 + 14,00 = 359,00 
+Desconto: 14% 
+Total a pagar: 308,74 
+#################################################################################################
+
+/* 
+ * Atividades disciplina Fundamentos de Algoritmos Computacionais.
+ * Autor: Gilmar Ribeiro Santana
+ * Data: 23-03-2020
+ *
+ */
+#include <stdio.h>
+
+int main(void){
+
+    int codigo;    
+    float xx, yy, valor, desconto, total;
+
+//Cabeçalho. Nome da instituição. 
+    printf("\n");
+    printf("\n");
+    printf("*****   *   ***** ***** ***** *****  ****\n");
+    printf("*      * *  *       *   *     *   *    * \n");
+    printf("*     *   * *       *   *     *   *    * \n");
+    printf("****  ***** ****    *   ****  *****    * \n");
+    printf("*     *   * *       *   *     *  *  *  * \n");
+    printf("*     *   * *       *   *     *   * * *  \n");
+    printf("*     *   * *****   *   ***** *   *  *   \n");
+
+//Cabeçalho da atividade.
+    printf("\n\n********************************************************\n\n");
+    printf("Receba o código do produto e entregue o seu valor final.");
+    printf("\n\n********************************************************\n");
+
+//Início do código.
+//Recebe o código do produto.
+    printf("\nInforme o código do produto de 4 dígitos.\n");
+    scanf("%d", &codigo);
+
+    while(codigo > 9999 )
+    {
+        printf("\nERRO! VERIFIQUE OS VALORES.\n");
+        printf("São admitidos apenas códigos de 4 dígitos.");
+        printf("\n\nInforme novamente o código do produto atentando para os 4 dígitos.\n");
+        scanf("%d", &codigo);
+    }
+//Separa o código em duas partes.
+    xx = codigo / 100; //Separa os dois primeiros dígitos do código.
+    yy = codigo % 100; //Separa os dois últimos dígitos do código.
+
+//Cálculo dos valores.    
+    valor = xx * 15 + yy;
+    desconto = yy / 100;
+    total = valor - (valor * desconto);
+
+//entrega o resultado do valor do produto.    
+    printf("\nO valor total do produto é R$ %.2f\n", total);
+
+    return 0;
+}
+    
