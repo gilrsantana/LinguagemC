@@ -1,4 +1,4 @@
 language = "bash"
-run = "cd /home/runner/LinguagemC/Projeto_FAC_em_C/Novos/ && pwd"
+run = "make main && chmod +x main && ./main"
 
 
