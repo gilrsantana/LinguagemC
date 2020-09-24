@@ -1,3 +1,4 @@
 language = "bash"
-run = ""
+run = "cd /home/runner/LinguagemC/Projeto\ FAC\ em\ C/Novos/"
+
 
