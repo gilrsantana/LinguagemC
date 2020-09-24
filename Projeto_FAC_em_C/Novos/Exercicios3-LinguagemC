@@ -1,0 +1,472 @@
+*********************************************************
+EXERCICIO 4 - LETRA A
+*********************************************************
+
+/* Escreva uma função para calcular e retornar a área de um retângulo. 
+ * Esta função deverá receber os valores das duas dimensões (base e altura)
+ * e retornar o valor da área.
+ */
+
+#include <stdio.h>
+#include <locale.h>
+
+int calculaAreaRetangulo(int lado1, int lado2);
+
+int main(void){
+    int base, altura, area;
+    setlocale(LC_ALL, "Portuguese");
+    
+    printf("\n");
+    printf("*********************************************************\n");
+    printf("* BEM VINDO AO PROGRAMA DE CÁLCULO DE ÁREA DE RETÂNGULO *\n");
+    printf("*********************************************************\n");
+    printf("\n");
+
+    printf("Informe o valor da base em cm: ");
+    scanf("%i", &base);
+
+    printf("Informe o valor da altura em cm: ");
+    scanf("%i", &altura);
+    
+    area = calculaAreaRetangulo(base, altura);
+
+    printf("A área do retângulo é %i cm2.\n\n", area);
+
+    return 0;
+}
+
+int calculaAreaRetangulo(int lado1, int lado2){
+    int area = lado1 * lado2;
+
+    return area;
+}
+
+
+*********************************************************
+EXERCICIO 4 - LETRA B
+*********************************************************
+
+/* 
+ * Escreva uma função para calcular e retornar o perímetro de um retângulo. 
+ * Esta função deverá receber os valores das duas dimensões (base e altura) 
+ * e retornar o valor do perímetro. 
+ */
+
+#include <stdio.h>
+#include <locale.h>
+
+int calculaPerimetroRetangulo(int lado1, int lado2);
+
+int main(void){
+    int base, altura, area;
+    setlocale(LC_ALL, "Portuguese");
+    
+    printf("\n");
+    printf("**************************************************************\n");
+    printf("* BEM VINDO AO PROGRAMA DE CÁLCULO DE PERÍMETRO DE RETÂNGULO *\n");
+    printf("**************************************************************\n");
+    printf("\n");
+
+    printf("Informe o valor da base em cm: ");
+    scanf("%i", &base);
+
+    printf("Informe o valor da altura em cm: ");
+    scanf("%i", &altura);
+    
+    area = calculaPerimetroRetangulo(base, altura);
+
+    printf("O perímetro do retângulo mede %i cm.\n\n", area);
+
+    return 0;
+}
+
+int calculaPerimetroRetangulo(int lado1, int lado2){
+    int perimetro = (lado1 * 2)+(lado2 * 2);
+
+    return perimetro;
+}
+
+
+*********************************************************
+EXERCICIO 4 - LETRA C
+*********************************************************
+
+/* 
+ * Escreva uma função para calcular e retornar o volume de uma caixa retangular. 
+ * Esta função deverá receber os valores dos lados a e b e altura h e retornar 
+ * o valor do volume. (V caixa = a * b * h)
+ */
+
+#include <stdio.h>
+#include <locale.h>
+
+int calculaVolumeCaixa(int aresta1, int aresta2, int aresta3);
+
+int main(void){
+    int base, altura, profundidade, volume;
+    setlocale(LC_ALL, "Portuguese");
+    
+    printf("\n");
+    printf("*******************************************************\n");
+    printf("* BEM VINDO AO PROGRAMA DE CÁLCULO DE VOLUME DE CAIXA *\n");
+    printf("*******************************************************\n");
+    printf("\n");
+
+    printf("Informe o valor da base em cm: ");
+    scanf("%i", &base);
+
+    printf("Informe o valor da altura em cm: ");
+    scanf("%i", &altura);
+
+    printf("Informe o valor da profundidade em cm: ");
+    scanf("%i", &profundidade);
+    
+    volume = calculaVolumeCaixa(base, altura, profundidade);
+
+    printf("O volume da caixa mede %i cm3.\n\n", volume);
+
+    return 0;
+}
+
+int calculaVolumeCaixa(int aresta1, int aresta2, int aresta3){
+    int volume = aresta1 * aresta2 * aresta3;
+
+    return volume;
+}
+
+
+*********************************************************
+EXERCICIO 4 - LETRA D
+*********************************************************
+
+/* 
+ * Escreva uma função para calcular e retornar a área de um círculo. 
+ * Esta função deverá receber o valor do raio como parâmetro e retornar o valor da área
+ */
+
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+
+#define PI 3.1415
+
+float calculaAreaCirculo(float tamanho);
+
+int main(void){
+    float raio, area;
+    setlocale(LC_ALL, "Portuguese");
+    
+    printf("\n");
+    printf("*******************************************************\n");
+    printf("* BEM VINDO AO PROGRAMA DE CÁLCULO DE AREA DO CÍRCULO *\n");
+    printf("*******************************************************\n");
+    printf("\n");
+
+    printf("Informe o valor do raio em cm: ");
+    scanf("%f", &raio);
+
+    area = calculaAreaCirculo(raio);
+
+    printf("A area do círculo mede %.2f cm2.\n\n", area);
+
+    return 0;
+}
+
+float calculaAreaCirculo(float medida){
+    float area = PI * pow(medida,2);
+    
+    return area;
+}
+
+
+*********************************************************
+EXERCICIO 4 - LETRA E
+*********************************************************
+
+/* 
+ * Escreva uma função para calcular e retornar o perímetro um círculo. 
+ * Esta função deverá receber o valor do raio como parâmetro e retornar o valor do perímetro.
+ */
+
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+
+#define PI 3.1415
+
+float calculaPerimetroCirculo(float tamanho);
+
+int main(void){
+    float raio, perimetro;
+    setlocale(LC_ALL, "Portuguese");
+    
+    printf("\n");
+    printf("************************************************************\n");
+    printf("* BEM VINDO AO PROGRAMA DE CÁLCULO DE PERÍMETRO DO CÍRCULO *\n");
+    printf("************************************************************\n");
+    printf("\n");
+
+    printf("Informe o valor do raio em cm: ");
+    scanf("%f", &raio);
+
+    perimetro = calculaPerimetroCirculo(raio);
+
+    printf("O perímetro do círculo mede %.2f cm.\n\n", perimetro);
+
+    return 0;
+}
+
+float calculaPerimetroCirculo(float medida){
+    float perimetro = PI * 2 * medida;
+    
+    return perimetro;
+}
+
+
+*********************************************************
+EXERCICIO 4 - LETRA F
+*********************************************************
+
+/*
+ * Escreva uma função para calcular e retornar o volume de um cilindro. 
+ * Esta função deverá receber os valores do raio e da altura (r,h) e retornar 
+ * o valor do volume (V cilindro = πhr2).
+ */
+
+#include <stdio.h>
+#include <locale.h>
+
+#define PI 3.1415
+
+float calculaVolumeCilindro(float medRaio, float medAltura);
+
+int main(void){
+    float raio, altura, volume;
+    setlocale(LC_ALL, "Portuguese");
+    
+    printf("\n");
+    printf("**********************************************************\n");
+    printf("* BEM VINDO AO PROGRAMA DE CÁLCULO DE VOLUME DO CILINDRO *\n");
+    printf("**********************************************************\n");
+    printf("\n");
+
+    printf("Informe o valor do raio em cm: ");
+    scanf("%f", &raio);
+    printf("Informe o valor da altura em cm: ");
+    scanf("%f", &altura);
+
+    volume = calculaVolumeCilindro(raio, altura);
+
+    printf("O volume do cilindro mede %.2f cm3.\n\n", volume);
+
+    return 0;
+}
+
+float calculaVolumeCilindro(float medRaio, float medAltura){
+    float volume = PI * 2 * medRaio * medAltura;
+    
+    return volume;
+}
+
+
+
+*********************************************************
+EXERCICIO 4 - LETRA G
+*********************************************************
+
+/*
+ * Escreva uma função para calcular e retornar a hipotenusa de um triângulo retângulo. 
+ * Esta função deverá receber os valores dos catetos e retornar o valor da hipotenusa.
+ */
+
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+
+#define PONTO_A_X 0.0
+#define PONTO_A_Y 0.0
+
+//Função para calcular a hipotenusa
+float calculaHipotenusa(float medida1, float medida2);
+
+int main(void){
+    float cateto1, cateto2, hipotenusa;
+    setlocale(LC_ALL, "Portuguese");
+    
+    printf("\n");
+    printf("**************************************************\n");
+    printf("* BEM VINDO AO PROGRAMA DE CÁLCULO DE HIPOTENUSA *\n");
+    printf("**************************************************\n");
+    printf("\n");
+
+    printf("Informe o valor do primeiro cateto  em cm: ");
+    scanf("%f", &cateto1);
+    printf("Informe o valor do segundo cateto em cm: ");
+    scanf("%f", &cateto2);
+
+    hipotenusa = calculaHipotenusa(cateto1, cateto2);
+    printf("A hipotenusa mede %.2f cm.\n\n", hipotenusa);
+
+    return 0;
+}
+
+float calculaHipotenusa(float medida1, float medida2){
+    float hipotenusa = sqrt(pow(medida1,2) + pow(medida2,2));
+    
+    return hipotenusa;
+}
+
+
+*********************************************************
+EXERCICIO 4 - LETRA H
+*********************************************************
+
+/*
+ * Escreva uma função para calcular e retornar a distância entre dois pontos. A função recebe os valores das
+coordenadas dos pontos e retorna o valor da distância entre eles (comprimento da semireta) calculada por:
+ * d²(p1,p2) = (x2 - x1)² + (y2 - y1)²
+ */
+
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+
+float calculaDistancia(float medidaA1, float medidaA2, float medidaB1, float medidaB2);
+
+int main(void){
+    float pontoAx, pontoAy, pontoBx, pontoBy, distancia;
+    setlocale(LC_ALL, "Portuguese");
+    
+    printf("\n");
+    printf("**************************************************************\n");
+    printf("* BEM VINDO AO PROGRAMA DE CÁLCULO DE DISTÂNCIA ENTRE PONTOS *\n");
+    printf("**************************************************************\n");
+    printf("\n");
+
+    printf("Informe a posição x do ponto A: ");
+    scanf("%F", &pontoAx);
+    printf("Informe a posição y do ponto A: ");
+    scanf("%f", &pontoAy);
+    printf("Informe a posição x do ponto B: ");
+    scanf("%f", &pontoBx);
+    printf("Informe a posição x do ponto B: ");
+    scanf("%f", &pontoBy);
+
+    distancia = calculaDistancia(pontoAx, pontoAy, pontoBx, pontoBy);
+
+    printf("A distância entre os pontos mede %.2f.\n\n", distancia);
+
+    return 0;
+}
+
+float calculaDistancia(float medidaA1, float medidaA2, float medidaB1, float medidaB2){
+    float medida = sqrt(pow((medidaB1 - medidaA1),2) + pow((medidaB2 - medidaA2),2));
+    
+    return medida;
+}
+
+
+*********************************************************
+EXERCICIO 4 - LETRA I
+*********************************************************
+
+/*
+ * Escreva uma função para calcular e retornar o perímetro de um triângulo. 
+ * Esta função recebe os valores dos 3 lados e retorna o valor do perímetro.
+ */
+
+#include <stdio.h>
+#include <locale.h>
+
+float calculaPerimetroTriangulo(float medida1, float medida2, float medida3);
+
+int main(void){
+    float lado1, lado2, lado3, perimetro;
+    setlocale(LC_ALL, "Portuguese");
+    
+    printf("\n");
+    printf("**************************************************************\n");
+    printf("* BEM VINDO AO PROGRAMA DE CÁLCULO DE PERÍMETRO DO TRIÂNGULO *\n");
+    printf("**************************************************************\n");
+    printf("\n");
+
+    printf("Informe a medida do lado 1 em cm: ");
+    scanf("%f", &lado1);
+    printf("Informe a medida do lado 2 em cm: ");
+    scanf("%f", &lado2);
+    printf("Informe a medida do lado 3 em cm: ");
+    scanf("%f", &lado3);
+
+    perimetro = calculaPerimetroTriangulo(lado1, lado2, lado3);
+
+    printf("O perímetro do triângulo mede %.2f cm.\n\n", perimetro);
+
+    return 0;
+}
+
+float calculaPerimetroTriangulo(float medida1, float medida2, float medida3){
+    float medida = medida1 + medida2 + medida3;
+    
+    return medida;
+}
+
+
+*********************************************************
+EXERCICIO 4 - LETRA J
+*********************************************************
+
+
+/*
+ * Escreva uma função para calcular e retornar a área de um triângulo. 
+ * Esta função recebe os valores dos 3 lados e calcula a área pela fórmula de Heron:
+ * A² = S*(S-a)(S-b)(S-c).
+ * Escreva uma função para calcular e retornar o perímetro de um triângulo. 
+ * Esta função recebe os valores dos 3 lados e retorna o valor do perímetro.
+ */
+
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+
+float calculaAreaTriangulo(float medida1, float medida2, float medida3);
+
+float calculaSemiPerimetro(float medida1, float medida2, float medida3);
+
+int main(void){
+    float lado1, lado2, lado3, area;
+    setlocale(LC_ALL, "Portuguese");
+    
+    printf("\n");
+    printf("**************************************************************\n");
+    printf("* BEM VINDO AO PROGRAMA DE CÁLCULO DE ÁREA DO TRIÂNGULO *\n");
+    printf("**************************************************************\n");
+    printf("\n");
+
+    printf("Informe a medida do lado 1 em cm: ");
+    scanf("%f", &lado1);
+    printf("Informe a medida do lado 2 em cm: ");
+    scanf("%f", &lado2);
+    printf("Informe a medida do lado 3 em cm: ");
+    scanf("%f", &lado3);
+
+    area = calculaAreaTriangulo(lado1, lado2, lado3);
+
+    printf("O área do triângulo mede %.2f cm.\n\n", area);
+
+    return 0;
+}
+
+float calculaAreaTriangulo(float medida1, float medida2, float medida3){
+    float medida;
+    float sP = calculaSemiPerimetro(medida1, medida2, medida3);
+    medida = sqrt( sP * (sP - medida1)*(sP - medida2)*(sP - medida3) );
+    
+    return medida;
+}
+
+float calculaSemiPerimetro(float medida1, float medida2, float medida3){
+    float semiPerimetro = (medida1 + medida2 + medida3) / 2;
+
+    return semiPerimetro;
+}
+
