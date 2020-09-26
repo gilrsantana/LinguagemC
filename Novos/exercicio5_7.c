@@ -30,10 +30,14 @@
 #include <stdlib.h>
 
 #define HORA_PADRAO 30.00
+
+float totaliza_horas_variaveis(int dia);
+float totaliza_vales();
+
 int main(void){
     char nome[61];
-    int dia, hora, acumulador=0, contrato, vale;
-    float salario, valorVale, somaVale=0.0;
+    int dia, hora, contrato;
+    float salario, somaVale;
 
     printf("***********************************************\n");
     printf("* BEM VINDO AO PROGRAMA DE CÁLCULO DE SALÁRIO *\n");
@@ -54,18 +58,32 @@ int main(void){
         scanf("%i", &dia);
         printf("Informe a quantidade de horas por dia trabalhado: ");
         scanf("%i", &hora);
-        salario = dia * hora * HORA_PADRAO;
+        somaVale = totaliza_vales();
+        salario = dia * hora * HORA_PADRAO - somaVale;
     }else{
         printf("Informe a quantidade de dias trabalhados: ");
         scanf("%i", &dia);
-        for(int i = 1; i <= dia; i++){
-            printf("Informe a quantidade de horas no dia %i.\n", i);
-            scanf("%i", &hora);
-            acumulador+=hora;
-        }
-        salario = acumulador * HORA_PADRAO;
+        salario = totaliza_horas_variaveis(dia);
     }
 
+    printf("%s, seu salário devido é R$ %.2f.\n\n", nome, salario);
+    return 0;
+}
+float totaliza_horas_variaveis(int dia){
+    float salario, acumulador, valorVale;
+    int hora;
+    for(int i = 1; i <= dia; i++){
+        printf("Informe a quantidade de horas no dia %i.\n", i);
+        scanf("%i", &hora);
+        acumulador+=hora;
+    }
+    valorVale = totaliza_vales();
+    salario = acumulador * HORA_PADRAO - valorVale;
+    return salario;
+}
+float totaliza_vales(){
+    int vale;
+    float valorVale, somaVale=0.0;
     printf("Foi solicitado algum vale? 1-SIM / 0-NÃO: ");
     scanf("%i", &vale);
     while(vale < 0 || vale >1){
@@ -83,9 +101,5 @@ int main(void){
             printf("Total de vale = %.2f\n", somaVale);
         }
     }
-    salario = salario - somaVale;
-    printf("%s, seu salário devido é R$ %.2f.\n\n", nome, salario);
-
-
-    return 0;
+    return somaVale;
 }
