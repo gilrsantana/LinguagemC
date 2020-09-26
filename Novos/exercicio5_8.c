@@ -59,5 +59,6 @@ int main(void){
     }else{
         printf("Foram realizadas %i partidas e você venceu %i\n\n.", partida, vencedor);
     }
+    
     return 0;
 }
