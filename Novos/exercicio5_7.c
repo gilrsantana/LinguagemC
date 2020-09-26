@@ -9,6 +9,7 @@
  * Faça um programa, utilizando a função totaliza_horas_variaveis, para calcular o salário que deve 
  * ser pago às pessoas contratadas de acordo com a seguinte fórmula:
  * Salário a pagar= (número total de horas trabalhadas * 30) – (total de vales pagos)
+ * 
  * Considere que:
  * - Para cada contratado é perguntado seu nome e o tipo de contrato (1 ou 2), a quantidade de vales
  * retirados e o valor de cada vale.
