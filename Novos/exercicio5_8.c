@@ -32,7 +32,12 @@ int main(void){
         printf("PARTIDA %i\n", i);
         printf("Faça sua escolha:\n");
         printf("PEDRA = 1 / TESOURA = 2 / PAPEL = 3: ");
-        scanf("%i", &escolha);    
+        scanf("%i", &escolha);
+        while(escolha < 1 || escolha > 3){
+                printf("ERRO! Digite um valor entre as opções apresentadas\n");
+                printf("PEDRA = 1 / TESOURA = 2 / PAPEL = 3: ");
+                scanf("%i", &escolha);
+        }   
         computador = rand()%4;
         while(computador == 0){
             computador = rand()%4;

@@ -50,6 +50,11 @@ int main(void){
             }else{
                 printf("O evento ocorreu dentro do horário comercial? 1-SIM / 0-NÃO: ");
                 scanf("%i", &hComercial);
+                while(hComercial < 0 || hComercial > 1){
+                    printf("ERRO! Digite um valor entre as opções apresentadas\n");
+                    printf("O evento ocorreu dentro do horário comercial? 1-SIM / 0-NÃO: ");
+                    scanf("%i", &hComercial);
+                }
                 if(hComercial){
                     multa = MULTA_GRAU_4 + (ACRESCIMO * difVelocidade);
                 }else{

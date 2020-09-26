@@ -69,6 +69,7 @@ int main(void){
     printf("%s, seu salário devido é R$ %.2f.\n\n", nome, salario);
     return 0;
 }
+
 float totaliza_horas_variaveis(int dia){
     float salario, acumulador, valorVale;
     int hora;
