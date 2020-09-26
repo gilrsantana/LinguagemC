@@ -27,4 +27,65 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
+#define HORA_PADRAO 30.00
+int main(void){
+    char nome[61];
+    int dia, hora, acumulador=0, contrato, vale;
+    float salario, valorVale, somaVale=0.0;
+
+    printf("***********************************************\n");
+    printf("* BEM VINDO AO PROGRAMA DE CÁLCULO DE SALÁRIO *\n");
+    printf("***********************************************\n\n");
+
+    printf("Informe seu nome completo: ");
+    gets(nome);
+
+    printf("Qual o tipo de contrato? 1-FIXO / 2-VARIÁVEL: ");
+    scanf("%i", &contrato);
+    while(contrato < 1 || contrato >2){
+        printf("ERRO! São aceitos apenas os valores pedidos.\n\n");
+        printf("Qual o tipo de contrato? 1-FIXO / 2-VARIÁVEL: ");
+        scanf("%i", &contrato);
+    }
+    if(contrato == 1){
+        printf("Informe a quantidade de dias trabalhados: ");
+        scanf("%i", &dia);
+        printf("Informe a quantidade de horas por dia trabalhado: ");
+        scanf("%i", &hora);
+        salario = dia * hora * HORA_PADRAO;
+    }else{
+        printf("Informe a quantidade de dias trabalhados: ");
+        scanf("%i", &dia);
+        for(int i = 1; i <= dia; i++){
+            printf("Informe a quantidade de horas no dia %i.\n", i);
+            scanf("%i", &hora);
+            acumulador+=hora;
+        }
+        salario = acumulador * HORA_PADRAO;
+    }
+
+    printf("Foi solicitado algum vale? 1-SIM / 0-NÃO: ");
+    scanf("%i", &vale);
+    while(vale < 0 || vale >1){
+        printf("ERRO! São aceitos apenas os valores pedidos.\n\n");
+        printf("Foi solicitado algum vale? 1-SIM / 0-NÃO: ");
+        scanf("%i", &vale);
+    }
+    if(vale){
+        printf("Informe a quantidade de vales requisitados: ");
+        scanf("%i", &vale);
+        for(int i = 1; i <= vale; i++){
+            printf("Informe o valor do vale %i.\n", i);
+            scanf("%f", &valorVale);
+            somaVale+=valorVale;
+            printf("Total de vale = %.2f\n", somaVale);
+        }
+    }
+    salario = salario - somaVale;
+    printf("%s, seu salário devido é R$ %.2f.\n\n", nome, salario);
+
+
+    return 0;
+}

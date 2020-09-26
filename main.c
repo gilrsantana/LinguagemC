@@ -1,184 +1,90 @@
 /*
- * Escreva um programa que imprime na tela um menu simulando as seguintes operações em um caixa eletrônico
- * de um banco: "Digite a opcao da operacao que deseja fazer:
- * 1 para ver o saldo atual da conta,
- * 2 para fazer um deposito;
- * 3 para fazer um saque.
- * 4  para finalizar
- * Inicialmente, seu programa deve solicitar ao usuário como entrada, via teclado, sua conta e o saldo
- * inicial da conta.
- * Após o saldo fornecido, o programa deve imprimir o menu acima e executar a opção selecionada até a 
- * opção 4 ser digitada.
- * Após o término da execução de cada  operação de depósito e saque, o saldo atual deve ser impresso.
- * Obrigatoriamente, seu programa deve definir uma função para o menu.
- * resp_menu: A função  mostra as opções do menu, captura e valida a opção escolhida, retornando-a
- * MODIFIQUE seu programa para processar vários clientes. Término: conta == 0
+ * Uma empresa de eventos, que paga R$30,00 por hora, contratou pessoas de duas formas:
+ * I. FIXO: 20 dias no mês e em cada dia x horas. Por ex. João foi contratado para trabalhar 
+ * 10 dias 4 horas por dia e Pedro para trabalhar 20 dias, 8 horas por dia
+ * II. VARIÁVEL: n dias e em cada dia uma quantidade variável de horas. Por ex., Maria foi contratada
+ * para trabalhar 4 dias, no 1º dia, 2 horas, no 2º dia, 5 horas, no 3º, 3 horas e no 4º 1 hora. 
+ * Zé foi contratado para trabalhar 2 dias, no 1º dia, 12 horas e no 2º dia, 10 horas.
+ * Qualquer contratado pode tirar vales durante o período que está trabalhando.
+ * Faça um programa, utilizando a função totaliza_horas_variaveis, para calcular o salário que deve 
+ * ser pago às pessoas contratadas de acordo com a seguinte fórmula:
+ * Salário a pagar= (número total de horas trabalhadas * 30) – (total de vales pagos)
+ * Considere que:
+ * - Para cada contratado é perguntado seu nome e o tipo de contrato (1 ou 2), a quantidade de vales
+ * retirados e o valor de cada vale.
+ * - A seguir, é perguntado:
+ * a) para os fixos (tipo 1): a quantidade de dias trabalhados (n) e a quantidade de horas em cada dia (x)
+ * b) para os variáveis (tipo 2): a quantidade de dias trabalhados ( n) e para cada dia a quantidade de
+ * horas em cada dia.
+ * 
+ * No final, seu programa deve mostrar o nome do contratado com maior salário.
+ * Término da entrada de dados: nome vazio
+ * Obs: Considere que todos os dados digitados estão corretos.
+ * Função totaliza_horas_variaveis: calcula a soma das horas trabalhadas pelos contratos do tipo 2. 
+ * A função deve receber como parâmetro um número inteiro com a quantidade de dias trabalhados. 
+ * Esta função lê do teclado a quantidade de horas trabalhadas em cada dia e retorna a 
+ * soma das horas trabalhadas.
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
-#define INICIAL_MINIMO 20.00 // Valor mínimo para abertura de conta
-int menu();// Mostra opções de menu e retorna com uma opção
-int validarConta();// Valida a conta com o parâmetro de 3 dígitos
-float depositoInicial();// Inicia a conta com um depósito inicial mínimo 
-float realizarDeposito(float valor);// Realiza depósito em uma conta já criada
-float realizarSaque(float valor);// Realiza saque em uma conta já criada
-
+#define HORA_PADRAO 30.00
 int main(void){
-  float conta[1000]={0.0};
-  float depInicial, saldo, novoSaldo, saque, deposito;
-  int codigo, operacao, inicial, continuar = 1, opcao;
+    char nome[61];
+    int dia, hora, acumulador=0, contrato, vale;
+    float salario, valorVale=0.0;
 
-  printf("*********************************\n");
-  printf("* BEM VINDO AO SISTEMA BANCÁRIO *\n");
-  printf("*********************************\n\n");
-  codigo = validarConta();
-  conta[codigo] = depositoInicial();
-  if(conta[codigo] == 0){
-    printf("A conta %i não foi iniciada\n", codigo);
-  }else{
-    printf("A conta %i foi iniciada com o valor de R$ %.2f.\n\n", codigo, conta[codigo]);
-  }
-    
-  do{
-    printf("\n***********************************\n");
-    printf("*          MENU PRINCIPAL         *\n");
-    printf("***********************************\n");
-    printf("Informe a opcao desejada.\n");
-    printf("1 - CRIAR NOVA CONTA\n");
-    printf("2 - REALIZAR CONSULTA, DEPOSITO OU SAQUE\n");
-    scanf("%i", &opcao);
+    printf("***********************************************\n");
+    printf("* BEM VINDO AO PROGRAMA DE CÁLCULO DE SALÁRIO *\n");
+    printf("***********************************************\n\n");
 
-    if(opcao == 1){
-      do{
-        printf("\n***********************************\n");
-        printf("*   SESSÃO DE CRIAÇÃO DE CONTA    *\n");
-        printf("***********************************\n");
-        codigo = validarConta();
-        if(conta[codigo] != 0){
-          printf("A conta %i já foi criada. Informe outra\n", codigo);
-        }else{
-          conta[codigo] = depositoInicial();
-          if(conta[codigo] < INICIAL_MINIMO){
-            printf("A conta não foi iniciada. Faça um depósito mínimo de R$ %.2f\n", INICIAL_MINIMO);
-            conta[codigo] = 0.0;
-          }else{
-            printf("A conta %i foi iniciada com o valor de R$ %.2f.\n", codigo, conta[codigo]);
-          }
-        }
-                
-      printf("Deseja criar outra conta? 1 - SIM / 0 - NÃO: ");
-      scanf("%i", &continuar);
-      printf("\n");
-      }while(continuar == 1);
+    printf("Informe seu nome completo: ");
+    gets(nome);
 
-    }else if(opcao == 2){
-      printf("\n***********************************\n");
-      printf("* SESSÃO DE MOVIMENTAÇÃO DE CONTA *\n");
-      printf("***********************************\n");
-      codigo = validarConta();
-      if(conta[codigo] == 0){
-        printf("A conta %i não foi iniciada\n", codigo);
-      }else{
-        do{
-          operacao = menu();
-
-          switch(operacao){
-          case 1:
-            printf("A conta %i tem o saldo de R$ %.2f\n", codigo, conta[codigo]);
-            break;
-
-          case 2:
-            conta[codigo] = realizarDeposito(conta[codigo]);
-            printf("O novo saldo da conta %i é R$ %.2f\n", codigo, conta[codigo]);
-            break;
-                        
-          case 3:
-            conta[codigo] = realizarSaque(conta[codigo]);
-            printf("O saldo da conta %i é R$ %.2f\n", codigo, conta[codigo]);
-            break;
-
-          case 0:
-            break;
-
-          default:
-            break;
-          }
-          printf("Deseja realizar outra operação na conta %i? 1 - SIM / 0 - NÃO: ", codigo);
-          scanf("%i", &continuar);
-          printf("\n");
-        }while(continuar == 1);
-      }       
+    printf("Qual o tipo de contrato? 1-FIXO / 2-VARIÁVEL: ");
+    scanf("%d", &contrato);
+    while(vale < 0 || vale >1){
+        printf("ERRO! São aceitos apenas os valores pedidos.\n\n");
+        printf("Qual o tipo de contrato? 1-FIXO / 2-VARIÁVEL: ");
+        scanf("%d", &contrato);
     }
-                    
-    printf("Deseja continuar no programa? 1 - SIM / 0 - NÃO: ");
-    scanf("%i", &continuar);
-        printf("\n");
-  }while(continuar == 1);
-
-  return 0;
-}
-// Mostra opções de menu e retorna com uma opção
-int menu(){
-  int item;
-
-  printf("Informe a operação desejada.\n");
-  printf("1 - CONSULTAR SALDO\n");
-  printf("2 - REALIZAR DEPÓSITO\n");
-  printf("3 - REALIZAR SAQUE\n");
-  printf("0 - FINALIZAR\n");
-  scanf("%i", &item);
-  return item;
-}
-// Valida a conta com o parâmetro de 3 dígitos
-int validarConta(){
-  int codigo;
-  printf("Informe o número da conta com três dígitos: ");
-  scanf("%i", &codigo);
-  while(codigo < 100 || codigo > 999){
-    printf("ERRO! Digite um número entre 100 e 999\n");
-    printf("Informe o número da conta com três dígitos: ");
-    scanf("%i", &codigo);
-  }
-  return codigo;
-}
-// Inicia a conta com um depósito inicial
-float depositoInicial(){
-  float valor = 0.0;
-  printf("Informe o valor do depósito inicial da conta: ");
-  scanf("%f", &valor);
-  if(valor < INICIAL_MINIMO){
-    printf("SUA CONTA PRECISA SER INICIADA COM UM VALOR MÍNIMO DE R$ %.2f\n", INICIAL_MINIMO);
-    valor = 0.0;
-  }
-  return valor;
-}
-// Realiza depósito em uma conta
-float realizarDeposito(float valor){
-  float deposito;
-  if(valor == 0){
-    printf("CONTA NÃO INICIADA. REALIZE UM DEPÓSITO INICIAL MÍNIMO DE R$ %.2f\n", INICIAL_MINIMO);
-  }else{
-    printf("Informe o valor do depósito: ");
-    scanf("%f", &deposito);
-    valor+=deposito;
-  }
-    
-  return valor;
-}
-// Realiza saque em uma conta
-float realizarSaque(float valor){
-  float saque;
-  printf("Informe o valor do saque: ");
-  scanf("%f", &saque);
-  if(saque > valor){
-    printf("SAQUE NÃO AUTORIZADO.\n");
-  }else{
-    if((valor - saque) <= 0.000000000000){
-    printf("SUA CONTA NÃO PODE TER SALDO ZERADO.\n");
+    if(contrato == 1){
+        printf("Informe a quantidade de dias trabalhados: ");
+        scanf("%d", &dia);
+        printf("Informe a quantidade de horas por dia trabalhado: ");
+        scanf("%d", &hora);
+        salario = dia * hora * HORA_PADRAO;
     }else{
-      valor-=saque;
+        printf("Informe a quantidade de dias trabalhados: ");
+        scanf("%d", &dia);
+        for(int i = 1; i <= dia; i++){
+            printf("Informe a quantidade de horas no dia %i.\n", i);
+            scanf("%d", &hora);
+            hora+=hora;
+        }
+        salario = dia * hora * HORA_PADRAO;
     }
-  } 
-  return valor;
+
+    printf("Foi solicitado algum vale? 1-SIM / 0-NÃO: ");
+    scanf("%d", vale);
+    while(vale < 0 || vale >1){
+        printf("ERRO! São aceitos apenas os valores pedidos.\n\n");
+        printf("Foi solicitado algum vale? 1-SIM / 0-NÃO: ");
+        scanf("%d", vale);
+    }
+    if(vale){
+        printf("Informe a quantidade de vales requisitados: ");
+        scanf("%d", &vale);
+        for(int i = 1; i <= vale; i++){
+            printf("Informe o valor do vale %i.\n", i);
+            scanf("%f", &valorVale);
+            valorVale+=valorVale;
+        }
+    }
+    salario = salario - vale;
+    printf("%s, seu salário devido é %.2f.\n\n", nome, salario);
+
+
+    return 0;
 }
