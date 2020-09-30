@@ -28,8 +28,10 @@
 int verificaIdade(int referencia);
 
 int main(void){
-    int id;             // Registra o id do primeiro participante
-    int idade;          // Registra a idade do primeiro participante
+    int id1;            // Registra o id do primeiro participante
+    int idade1;         // Registra a idade do primeiro participante
+    int id2;            // Registra o id dos participantes dentro do laço
+    int idade2;         // Registra a idade dos participantes dentro do laço
     int grupo;          // Contabiliza a quantidade total de participantes
     int menor;          // Contabiliza a quantidade de participantes menor que IDADE_MINIMA
     int maior;          // Contabiliza a quantidade de participantes maior ou igual a 18 anos
@@ -39,7 +41,7 @@ int main(void){
     int excursao=1;     // Inicia o contador do número de excursões
     float metadeGrupo;  // Utilizada para verificar e aceitar valor decimal referente metade do grupo
 
-    grupo=menor=maior=valida=maxId=maxIdade=0; // Inicia essas variáveis em 0
+    grupo=menor=maior=valida=0; // Inicia essas variáveis em 0
 
     printf("************************************************\n");
     printf("****  PROGRAMA DE AGENDAMENTO PARA EXCURSÃO ****\n");
@@ -49,59 +51,76 @@ int main(void){
     printf("(a) grupo de no mínimo 5 pessoas\n");
     printf("(b) pelo menos a metade dos participantes devem ser maior de idade\n");
     printf("(c) não pode haver integrantes com menos de %i anos\n", IDADE_MINIMA);
-    printf("(d) o integrante mais velho será escolhido o líder da excursão\n\n");
+    printf("(d) o integrante mais velho será escolhido o líder da excursão\n");
 
     while(excursao <= 5){// Início de verificação das 5 excursões
-      id=1;
-      while(id > 0){// Início do laço para entrada de dados dos participantes
+        printf("\nInforme os dados da excursao %i.\n\n", excursao);
         printf("Informe Id ou 0 para sair: ");
-        scanf("%i", &id);
+        scanf("%i", &id1);
         
-        if(id > 0){// Caso id=0, fim do programa
-          idade = verificaIdade(id);
-          if(idade < IDADE_MINIMA){
-            menor++;
+        if(id1 == 0){// Caso id=0, fim do programa
+            id2 = 0;
+        }else{
+            idade1 = verificaIdade(id1);
+            if(idade1 < IDADE_MINIMA){
+                menor++;
             }else{
-              if(idade >= 18){
-                maior++;
-              }
-              if(idade>maxIdade){
-                maxIdade = idade;
-                maxId = id;
-              }
+                if(idade1 >= 18){
+                    maior++;
+                }
             }
-          grupo++;
+            grupo++;
+            maxIdade = idade1;
+            maxId = id1;
+            id2 = 1;
         }
-      } // Fim do laço para entrada de dados dos participantes
     
-      if(grupo < NUMERO_MINIMO){ // Verifica número mínimo de participantes
-        printf("%i pessoas. Pessoas insuficientes na excursão %i. Mínimo de %i.\n\n", grupo, excursao,NUMERO_MINIMO);
-      }else{ // Verifica se pelo menos metade dos participantes é maior de idade
-        metadeGrupo = grupo / 2.0;
-        if((metadeGrupo) > maior){
-          printf("Não há pessoas maior de idade suficientes na excursao %i.\n", excursao);
-          printf("Metade do grupo precisa ser de pessoas maior de idade.\n\n");
-        }else{ // Verifica se há algum participante menor de idade
-          if(menor){
-            printf("O grupo tem pelo menos 1 pessoa menor de 11 anos na excursão %i.\n\n", excursao);
+        while(id2 != 0){// Início do laço para entrada de dados dos demais participantes
+            printf("Informe Id ou 0 para sair: ");
+            scanf("%i", &id2);
+        
+            if(id2 != 0){// Caso id=0, fim do programa
+                idade2 = verificaIdade(id2);
+                if(idade2 < IDADE_MINIMA){
+                    menor++;
+                }else{
+                    if(idade2 >= 18){
+                     maior++;
+                    }
+                    if(idade2>maxIdade){
+                        maxIdade = idade2;
+                        maxId = id2;
+                    }
+                }
+                grupo++;
+            }
+        } // Fim do laço para entrada de dados dos demais participantes
+    
+        if(grupo < NUMERO_MINIMO){ // Verifica número mínimo de participantes
+            printf("%i pessoas. Pessoas insuficientes na excursão %i. Mínimo de %i.\n\n", grupo, excursao,NUMERO_MINIMO);
+        }else{ // Verifica se pelo menos metade dos participantes é maior de idade
+            metadeGrupo = grupo / 2.0;
+            if((metadeGrupo) > maior){
+                printf("Não há pessoas maior de idade suficientes na excursao %i.\n", excursao);
+                printf("Metade do grupo precisa ser de pessoas maior de idade.\n\n");
+            }else{ // Verifica se há algum participante menor de idade
+                if(menor){
+                    printf("O grupo tem pelo menos 1 pessoa menor de 11 anos na excursão %i.\n\n", excursao);
       
-          }else{ // Imprime os dados da excursão válida
-            printf("O grupo tem %i pessoas e o Id %i é o líder do grupo. idade = %i.\n", grupo, maxId, maxIdade);
-            printf("A excursão %i é VÁLIDA.\n\n", excursao);
-            valida++; // Acumula quantidade de excursões válidas
-          }
+                }else{ // Imprime os dados da excursão válida
+                    printf("O grupo tem %i pessoas e o Id %i é o líder do grupo. idade = %i.\n", grupo, maxId, maxIdade);
+                    printf("A excursão %i é VÁLIDA.\n\n", excursao);
+                    valida++; // Acumula quantidade de excursões válidas
+                }
+            }
         }
-      }
-      grupo=menor=maior=0; // Reinicia as variáveis com 0 para a próxima sequência
-      excursao++;
+        grupo=menor=maior=0; // Reinicia as variáveis com 0 para a próxima sequência
+        excursao++;
     } // Fim do while de verificação de excursão
     printf("Total de excursão válida = %i\n\n", valida);
     return 0;
 } // Fim da Função main
 
-/***********************************************************/
-/******************* FUNÇÕES AUXILIARES ********************/
-/***********************************************************/
 int verificaIdade(int referencia){
     int idade;
     printf("Informe a idade: ");
