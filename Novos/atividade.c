@@ -8,7 +8,7 @@
  * 5- instalar um kit de teclado e mouse sem fio Microsoft
  *
  * Há algumas regras que devem ser seguidas nesse upgrade:
- * 1- o orçamento não deve ultrapassar 1500,00
+ * 1- o orçamento não deve ultrapassar 2000,00
  * Caso os melhores valores sejam conseguidos em uma única loja e se ultrapassar em até 
  * 10% do valor do teto de gasto e a loja aceitar o pagamento das peças parceladas em 10x
  * no cartão de crédito sem juros, ele aceita esse excesso do teto,
@@ -39,81 +39,130 @@
  */
 #include <stdio.h>
 
-#define MAX_ORCAMENTO 1500.00
-#define LIMITE_ORCAMENTO 1650.00
-#define VERIFICADOR1 900000000.00
-#define VERIFICADOR2 1000000.00
-
-float calculaProduto();
-int retornaQuantidade(float valor);
-float retornaUnitario(float valor, int quantidade);
+#define MAX_ORCAMENTO 2000.00
+#define LIMITE_ORCAMENTO 2200.00
 
 int main(void){
-  int loja, cont, desconto, qtd;
+  int loja, cont=1, desconto, qtd, memLoja, ssdLoja, videoLoja, mon23Loja, mon21Loja, tecLoja, acLoja;
   int memoria, ssd, video, monitor23, monitor21, teclado;
-  float menorMemoria, menorSsd, menorVideo, menorMonitor23, menorMonitor21, menorTeclado;
-  float vMemoria,totalMemoria, vSsd, vVideo, vMonitor23, vMonitor21, vTeclado, acumulador=0;
-  menorMemoria=menorSsd=menorVideo=menorMonitor23=menorMonitor21=menorTeclado=9999.99;
-  vMemoria=totalMemoria=vSsd=vVideo=vMonitor23=vMonitor21=vTeclado=0.00;
+  float menorMemoria, menorSsd, menorVideo, menorMonitor23, menorMonitor21, menorTeclado, menorLoja;
+  float vMemoria,vSsd, vVideo, vMonitor23, vMonitor21, vTeclado, acumulaLoja, acumulador=0;
+  float total;
 
-  printf("Possui memória DDR4 4GB? 1-SIM / 0-NÃO");
-  scanf("%i", &memoria);
-  if(memoria){
-    totalMemoria = calculaProduto();
-    qtd = retornaQuantidade(totalMemoria);
-    vMemoria = retornaUnitario(totalMemoria, qtd);
-    printf("total = %f\n", totalMemoria);
-    printf("unitario = %f\n", vMemoria);
-    printf("qtd = %i\n", qtd);
-    
+  menorMemoria=menorSsd=menorVideo=menorMonitor23=menorMonitor21=menorTeclado=menorLoja=9999.99;
+  printf("Deseja fazer a consulta em quantas lojas? ");
+  scanf("%i", &loja);
+  while(cont <= loja){
     printf("\n\n-------------------------------------------------------------------------\n\n");
-    printf("------ PRODUTO ----- UNITÁRIO ----- QTD --- TOTAL ----\n");
-    printf("MEMÓRIA 4GB DDR4 --- R$ %4.2f  ---  %i  --- R$ %4.2f\n", vMemoria, qtd, vMemoria*qtd);
-    acumulador+=totalMemoria;
+    printf("-------------------------------- LOJA %i ---------------------------------", cont);
     printf("\n\n-------------------------------------------------------------------------\n\n");
+    printf("Possui memória DDR4 4GB? 1-SIM / 0-NÃO ");
+    scanf("%i", &memoria);
+    if(memoria){
+      printf("Informe o preço unitário do produto R$ ");
+      scanf("%f", &vMemoria);
+      printf("Informe a quantidade do produto: ");
+      scanf("%i", &qtd);
+      total = vMemoria * qtd;
+      if(vMemoria < menorMemoria){
+        menorMemoria = vMemoria;
+        memLoja = cont;
+      }
+      printf("\n\n-------------------------------------------------------------------------\n\n");
+      printf("------ PRODUTO ----- UNITÁRIO ----- QTD --- TOTAL ----\n");
+      printf("MEMÓRIA 4GB DDR4 --- R$ %4.2f  ---  %i  --- R$ %4.2f\n", vMemoria, qtd, total);
+      acumulador+=total;
+      printf("\n\n-------------------------------------------------------------------------\n\n");
+    }
+    printf("Possui SSD 500GB tipo M2? 1-SIM / 0-NÃO ");
+    scanf("%i", &ssd);
+    if(ssd){
+      printf("Informe o preço unitário do produto R$ ");
+      scanf("%f", &vSsd);
+      printf("Informe a quantidade do produto: ");
+      scanf("%i", &qtd);
+      total = vSsd * qtd;
+      if(vSsd < menorSsd){
+        menorSsd = vSsd;
+        ssdLoja = cont;
+      }
+      printf("\n\n-------------------------------------------------------------------------\n\n");
+      printf("------ PRODUTO ----- UNITÁRIO ----- QTD --- TOTAL ----\n");
+      printf("SSD 500GB TP  M2 --- R$ %4.2f  ---  %i  --- R$ %4.2f\n", vSsd, qtd, total);
+      acumulador+=total;
+      printf("\n\n-------------------------------------------------------------------------\n\n");
+    }
+    printf("Possui placa de Vídeo 2GB? 1-SIM / 0-NÃO ");
+    scanf("%i", &video);
+    if(video){
+      printf("Informe o preço unitário do produto R$ ");
+      scanf("%f", &vVideo);
+      printf("Informe a quantidade do produto: ");
+      scanf("%i", &qtd);
+      total = vVideo * qtd;
+      if(vVideo < menorVideo){
+        menorVideo = vVideo;
+        videoLoja = cont;
+      }
+      printf("\n\n-------------------------------------------------------------------------\n\n");
+      printf("------ PRODUTO ----- UNITÁRIO ----- QTD --- TOTAL ----\n");
+      printf("PLACA VÍDEO  2GB --- R$ %4.2f  ---  %i  --- R$ %4.2f\n", vVideo, qtd, total);
+      acumulador+=total;
+      printf("\n\n-------------------------------------------------------------------------\n\n");
+    }
+    printf("Possui monitor 23"" 4k? 1-SIM / 0-NÃO ");
+    scanf("%i", &monitor23);
+    if(monitor23){
+      printf("Informe o preço unitário do produto R$ ");
+      scanf("%f", &vMonitor23);
+      printf("Informe a quantidade do produto: ");
+      scanf("%i", &qtd);
+      total = vMonitor23 * qtd;
+      if(vMonitor23 < menorMonitor23){
+        menorMonitor23 = vMonitor23;
+        mon23Loja = cont;
+      }
+      printf("\n\n-------------------------------------------------------------------------\n\n");
+      printf("------ PRODUTO ----- UNITÁRIO ----- QTD --- TOTAL ----\n");
+      printf("MONITOR 23"" R-4K --- R$ %4.2f  ---  %i  --- R$ %4.2f\n", vMonitor23, qtd, total);
+      acumulador+=total;
+      printf("\n\n-------------------------------------------------------------------------\n\n");
+    }
+    printf("Possui kit teclado e mouse sem fio? 1-SIM / 0-NÃO ");
+    scanf("%i", &teclado);
+    if(teclado){
+      printf("Informe o preço unitário do produto R$ ");
+      scanf("%f", &vTeclado);
+      printf("Informe a quantidade do produto: ");
+      scanf("%i", &qtd);
+      total = vTeclado * qtd;
+      if(vTeclado < menorTeclado){
+        menorTeclado = vTeclado;
+        tecLoja = cont;
+      }
+      printf("\n\n-------------------------------------------------------------------------\n\n");
+      printf("------ PRODUTO ----- UNITÁRIO ----- QTD --- TOTAL ----\n");
+      printf("kIT TEC. MOUSE S/F M/S --- R$ %4.2f  ---  %i  --- R$ %4.2f\n", vTeclado, qtd, total);
+      acumulador+=total;
+      printf("\n\n-------------------------------------------------------------------------\n\n");
+    }
+    acumulaLoja = acumulador;
+    if(acumulaLoja < menorLoja){
+        menorLoja = acumulaLoja;
+        acLoja = cont;
+      }
+    printf("Valor total dos produtos da loja %i: R$ %.2f\n\n", cont, acumulador);
+    cont++;
+    acumulador=0;
   }
-  printf("Possui SSD 500GB tipo M2? 1-SIM / 0-NÃO");
-  scanf("%i", &ssd);
-  if(ssd){
-    printf("Informe valor individual do produto: ");
-    scanf("%f", &vMemoria);
-    printf("Informe a quantidade do produto: ");
-    scanf("%i", &qtd);
-    vSsd*=qtd;
-    printf("\n\n-------------------------------------------------------------------------\n\n");
-    printf("------ PRODUTO ----- UNITÁRIO ----- QTD --- TOTAL ----\n");
-    printf("SSD 500GB TP  M2 --- R$ %4.2f  ---  %i  --- R$ %4.2f\n", vMemoria, qtd, vSsd);
-    acumulador+=vSsd;
-    printf("\n\n-------------------------------------------------------------------------\n\n");
-  }
 
-
-   
+  printf("Menor loja - %i ----- R$ %.2f\n\n", acLoja, menorLoja);
+  printf("Menor memoria - %i ----- R$ %.2f\n\n", memLoja, menorMemoria);
+  printf("Menor SSD - %i ----- R$ %.2f\n\n", ssdLoja, menorSsd);
+  printf("Menor Placa de video - %i ----- R$ %.2f\n\n", videoLoja, menorVideo);
+  printf("Menor monitor 23 - %i ----- R$ %.2f\n\n", mon23Loja, menorMonitor23);
+  printf("Menor teclado - %i ----- R$ %.2f\n\n", tecLoja, menorTeclado);
 
   return 0;
 }
 
-
-float calculaProduto(){
-  float produto, totalProduto;
-  float qtd;
-  printf("Informe valor individual do produto: ");
-  scanf("%f", &produto);
-  printf("Informe a quantidade do produto: ");
-  scanf("%f", &qtd);
-  totalProduto = ((produto * qtd) + VERIFICADOR1 + (qtd * VERIFICADOR2));
-  printf("%f\n", produto);
-  printf("%f\n", qtd);
-  printf("%f\n", totalProduto);
-  return totalProduto;
-}
-
-int retornaQuantidade(float valor){
-  int qtd = (valor - VERIFICADOR1) / VERIFICADOR2;
-  return qtd;
-}
-
-float retornaUnitario(float valor, int quantidade){
-  float unitario = (valor - VERIFICADOR1 - (quantidade * VERIFICADOR2)) / quantidade;
-  return unitario;
-}
