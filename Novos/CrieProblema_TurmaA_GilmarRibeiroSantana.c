@@ -6,9 +6,9 @@
  *
  * 1- aumentar a memória de seu computador de 2 para 8GB com 2 pentes de 4GB;
  * 2- Substituir o HD Sata de 500GB por outro HD de 500GB SSD tipo M2;
- * 3- colocar uma placa de vídeo de 2GB
- * 4- substituir o monitor de 17" por outro de 23" 4K
- * 5- instalar um kit de teclado e mouse sem fio Microsoft
+ * 3- colocar uma placa de vídeo de 2GB DDR4
+ * 4- substituir o monitor de 17" por outro de 23"
+ * 5- instalar um kit de teclado e mouse sem fio
  *
  * Há algumas regras que devem ser seguidas nesse upgrade:
  * 1- o orçamento não deve ultrapassar 2000,00
@@ -28,6 +28,8 @@
  * 4- o produto mais barato
  * 5- percentual do orçamento gasto
  */
+
+//////////////// INÍCIO DO PROGRAMA /////////////////
 #include <stdio.h>
 
 #define ORCAMENTO 2000               // VALOR LIMITE DO ORÇAMENTO
@@ -50,9 +52,9 @@ void listaProdutos();
 int verificaProduto();
 
 int main(void){
-// DECLARAÇÃO DE VARIÁVEIS
-    int loja=1;                  // ARMAZENA O NÚMERO DA LOJA
-    int cotacao=20201;           // ARAMAZENA O NÚMERO DA COTAÇÃO
+/////////////////// DECLARAÇÃO DE VARIÁVEIS /////////////////////////
+    int loja=1;                  // ARMAZENA O NÚMERO DA LOJA OU 0 PARA SAIR DO LAÇO
+    int cotacao=20201;           // ARAMAZENA O NÚMERO DA COTAÇÃO(ANO 2020 COTAÇÃO 1)
     int qtdProduto;              // ARMAZENA A QUANTIDADE DO PRODUTO COTADO
     int produto;                 // ARMAZENA O TIPO DO PRODUTO OU 0 PARA SAIR DO LAÇO
     int quantidade;              // ARMAZENA A QUANTIDADE DE PRODUTOS COMPRADOS
@@ -62,13 +64,13 @@ int main(void){
     int monitorLoja;             // ARMAZENA A LOJA COM O MENOR VALOR DE MONITOR
     int tecladoLoja;             // ARMAZENA A LOJA COM O MENOR VALOR DE KIT TECLADO SEM FIO
     int minLoja;                 // ARMAZENA A LOJA COM A MENOR COTAÇÃO DE PRODUTOS
-    int cotacaoMinima=0;         // REGISTRA COTAÇÕES FEITAS (MÍNIMO 3 PARA EXECUÇÃO DO PROGRAMA)
+    int cotacaoMinima=0;         // REGISTRA COTAÇÕES FEITAS (MÍNIMO 3 PARA FINALIZAÇÃO DO PROGRAMA)
 
     float precoProduto;          // REGISTRA O PREÇO INDIVIDUAL E TOTAL DO PRODUTO
     float soma;                  // ARMAZENA A SOMA DOS PRODUTOS DE MENOR PREÇO
-    float barato;                // ARAMAZENA O VALOR DO PRODUTO MAIS BARATO
-    float caro;                  // ARAMAZENA O VALOR DO PRODUTO MAIS CARO
-    float valorVenda=0.0;        // ARMAZENA O VALOR DOS PRODUTOS DA LOJA
+    float barato;                // ARMAZENA O VALOR DO PRODUTO MAIS BARATO
+    float caro;                  // ARMAZENA O VALOR DO PRODUTO MAIS CARO
+    float valorVenda=0.0;        // ARMAZENA O VALOR DA SOMA DOS PRODUTOS DA LOJA
     float menorMemoria;          // ARMAZENA O MENOR VALOR DA MEMÓRIA
     float menorSSD;              // ARMAZENA O MENOR VALOR DO SSD
     float menorVideo;            // ARMAZENA O MENOR VALOR DA PLACA DE VÍDEO
@@ -81,18 +83,19 @@ int main(void){
 
 
     // DESENVOLVIMENTO DO PROGRAMA
-    while(minVenda > ORCAMENTO && soma > ORCAMENTO){ //While de comparação de valores
-            
+    do{ //While de comparação de valores
+		printf("INFORME O CÓDIGO DA LOJA OU 0 PARA SAIR: ");
+        scanf("%i", &loja);
         while(loja > 0){ // Cotação dos preços da loja
-            printf("Cotação %i\n", cotacao);
-            printf("********************** LOJA %i **********************\n", loja);
+            printf("                     COTAÇÃO %i\n", cotacao);
+            printf("*********************** LOJA %i ***********************\n", loja);
             listaProdutos();
             produto = verificaProduto();
             while(produto > 0){
                 precoProduto = 0;
-                printf("Informe a quantidade desejada: ");
+                printf("INFORME A QUANTIDADE DO PRODUTO %i: ", produto);
                 scanf("%i", &qtdProduto);
-                printf("Informe o valor unitário: ");
+                printf("INFORME O VALOR UNITÁRIO DO PRODUTO %i: ", produto);
                 scanf("%f", &precoProduto);
                 precoProduto = precoProduto * qtdProduto;
                 if(produto == 1){   
@@ -127,14 +130,7 @@ int main(void){
                     }
                 }
                 valorVenda+=precoProduto;
-
-                printf("Informe o código do produto ou 0 para sair: ");
-                scanf("%i", &produto);
-                while(produto > 5 || produto < 0){
-                    printf("CÓDIGO INVÁLIDO. Informe o código do produto ou 0 para sair: ");
-                    scanf("%i", &produto);
-                }
-                
+                produto = verificaProduto(); 
             }
             printf("\n*****************************************\n");
             printf("loja %i - Total dos produtos = R$ %.2f\n", loja, valorVenda);
@@ -145,10 +141,10 @@ int main(void){
             }
             cotacaoMinima++;
             cotacao++;
-            printf("Informe o código do loja ou 0 para sair: ");
+            printf("INFORME O CÓDIGO DA NOVA LOJA OU 0 PARA SAIR: ");
             scanf("%i", &loja);
             if(loja == 0 && cotacaoMinima < 3){
-                printf("É preciso no mínimo três cotações\n");
+                printf("É PRECISO TER NO MÍNIMO TRÊS COTAÇÕES\n");
                 loja = cotacao;
             }
             valorVenda=0.0;
@@ -158,8 +154,8 @@ int main(void){
         printf("\n*****************************************\n");
         printf("RELATÓRIO DE COTAÇÃO\n");
         printf("MENOR COTAÇÃO\n");
-        printf("Valor: %.2f\n", minVenda);
-        printf("Loja: %i\n", minLoja);
+        printf("VALOR: %.2f\n", minVenda);
+        printf("LOJA: %i\n", minLoja);
         printf("\nMENORES PRODUTOS\n");
         printf("MEMÓRIA 4GB DDR4             LOJA %i       R$ %.2f\n", memLoja, menorMemoria);
         printf("SSD 500GB M2                 LOJA %i       R$ %.2f\n", ssdLoja, menorSSD);
@@ -180,7 +176,7 @@ int main(void){
             printf("Melhor cotação: LOJA %i - VALOR R$ %.2f", minLoja, minVenda);
         }
 
-    }// Fim while de comparação de valores
+    }while(minVenda > ORCAMENTO && soma > ORCAMENTO);// Fim while de comparação de valores
     
 
     printf("\n*****************************************\n");
@@ -215,6 +211,7 @@ int main(void){
 //////////////  FUNÇÕES AUXILIARES ///////////////
 //////////////////////////////////////////////////
 
+// RETORNA O ÍTEM MAIS CARO DA COTAÇÃO
 float calculaCaro(float vlr1, float vlr2, float vlr3, float vlr4, float vlr5){
     float valor = MENOR_VALOR;
     if(vlr1 > valor){
@@ -236,6 +233,7 @@ float calculaCaro(float vlr1, float vlr2, float vlr3, float vlr4, float vlr5){
     return valor;
 }
 
+// RETORNA O ÍTEM MAIS BARATO DA COTAÇÃO
 float calculaBarato(float vlr1, float vlr2, float vlr3, float vlr4, float vlr5){
     float valor = MAIOR_VALOR;
     if(vlr1 < valor && vlr1 != 0){
@@ -256,6 +254,7 @@ float calculaBarato(float vlr1, float vlr2, float vlr3, float vlr4, float vlr5){
     return valor;
 }
 
+// RETORNA A QUANTIDADE DE PRODUTOS COTADOS PARA TER REFERÊNCIA NO VALOR MÉDIO DOS PRODUTOS
 int quantificaProduto(float vlr1, float vlr2, float vlr3, float vlr4, float vlr5){
     int quantidade = 5;
     if(vlr1 == MENOR_VALOR){
@@ -272,6 +271,7 @@ int quantificaProduto(float vlr1, float vlr2, float vlr3, float vlr4, float vlr5
     return quantidade;
 }
 
+// EXIBE A LISTA DE PRODUTOS QUE ESTÃO SENDO COTADOS
 void listaProdutos(){
     printf("                  LISTA DE PRODUTOS\n\n");
     printf("PRODUTO -              DESCRIÇÃO              - VALOR \n");
@@ -279,18 +279,18 @@ void listaProdutos(){
     printf("  2   -               SSD 500GB M2          - R$ 00,00\n");
     printf("  3   -        PLACA DE VÍDEO 2GB DDR4      - R$ 00,00\n");
     printf("  4   -         MONITOR 23 POLEGADAS        - R$ 00,00\n");
-    printf("  5   -       KIT TECLADO E MOUSE SEM FIO   - R$ 00,00\n\n"); 
+    printf("  5   -       KIT TECLADO E MOUSE SEM FIO   - R$ 00,00\n");
+    printf("******************************************************\n\n");
 }
 
 /* 
- * Esta função deve trabalhar em conjunto com a função void listaProdutos(), 
+ * Esta função deve trabalhar em conjunto com a função listaProdutos(), 
  * pois o valor da variável código não pode ser maior que a quantidade de 
  * produtos listados na tabela da função listaProdutos()
  */
-
 int verificaProduto(){
     int codigo;
-    printf("Informe o número produto ou 0 para sair: ");
+    printf("INFORME O NÚMERO DO PRODUTO OU 0 PARA SAIR: ");
     scanf("%i", &codigo);
     while(codigo > 5 || codigo < 0){
         printf("CÓDIGO INVÁLIDO. Informe o código do produto ou 0 para sair: ");
