@@ -35,7 +35,7 @@ int main(void){
 
 	printf("Informe o código do departamento ou 0 para sair: ");
 	scanf("%i", &departamento);
-	while(departamento){
+	while(departamento > 0){
 		printf("Informe a quantidade de funcionários: ");
 		scanf("%i", &funcionario);
 		umDepartamento(funcionario, &qtate5, &qtacima);
