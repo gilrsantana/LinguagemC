@@ -15,33 +15,34 @@
  * ocorreu, o menor  grau de umidade e em que horário ocorreu e armazenar, nas variáveis cujos 
  * endereços são fornecidos, a menor temperatura e o menor grau de umidade registrados por ele.
  * Protótipo da função: void um_sensor (float *menortemp, float *menorumidade);
- * 
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <math.h>
 
 #define SENSOR 25
 
 void aSensor(float *lowTemp, float *lowHumid);
 
 int main(void){
-	float lowTemp=-1.0, lowHumid=-1.0, minTemp=-1, minHu=-1;
+	float lowTemp, lowHumid, minTemp, minHu;
 	int count=1, lowTempSensor, lowHumidSensor;
 	
-	
+	srand(time(NULL));
+   
+	lowTemp = lowHumid = minTemp = minHu = -1;
 	
 	while(count <= SENSOR){
 		printf("\n**** Sensor %i ****\n", count);
 		aSensor(&lowTemp, &lowHumid);
 		if(minTemp == -1){
 			minTemp = lowTemp;
+			lowTempSensor = count;
 		}
 		if(minHu == -1){
 			minHu = lowHumid;
-			
+			lowHumidSensor = count;
 		}
 		if(lowTemp < minTemp){
 			minTemp = lowTemp;
@@ -52,30 +53,37 @@ int main(void){
 			lowHumidSensor = count;
 		}
 		count++;
+		lowTemp = lowHumid = -1;
 	}
-	printf("\n");
-	printf("Sensor with lowest temperature .. %2i  -- %2.1f °C\n", lowTempSensor, minTemp);
-	printf("Sensor with lowest humidity ..... %2i  -- %2.1f °C\n", lowHumidSensor, minHu);
+	
+	printf("\n**************************************************\n");
+	printf("Sensor with lowest temperature markup.. %2i .... %2.1f°C\n", lowTempSensor,minTemp);
+	printf("Sensor with lowest humidity markup..... %2i .... %2.1f%%\n", lowHumidSensor, minHu);
 	
 	return 0;
 }
 
 void aSensor(float *lowTemp, float *lowHumid){
-	int hour, minute, random, hourRefTemp, minuteRefTemp, hourRefHu, minuteRefHu;
+	int hour, minute, hourRefTemp, minuteRefTemp, hourRefHu, minuteRefHu;
 	float temp, humidity;
-		
-	srand(time(NULL));
+	int ref;
 	
-	do{
-		hour = rand()%25;
-		minute = rand()%61;
-		temp = rand()%31;
-		humidity = rand()%81;
+	hour = rand() % 25;
+	while(hour != -1){
+		minute = rand() % 61;
+		temp = (rand()%31) + (rand()%37) + (rand()%41);
+		printf("temp %.1f\n", temp);
+		humidity = (rand()%61) + (rand()%67) + (rand()%71);
+		printf("humidity %.1f\n", humidity);
 		if((*lowTemp) == -1){
 			(*lowTemp) = temp;
+			hourRefTemp = hour;
+			minuteRefTemp = minute;
 		}
 		if((*lowHumid) == -1){
 			(*lowHumid) = humidity;
+			hourRefHu = hour;
+			minuteRefHu = minute;
 		}
 		if(temp < (*lowTemp)){
 			(*lowTemp)=temp;
@@ -88,15 +96,16 @@ void aSensor(float *lowTemp, float *lowHumid){
 			minuteRefHu = minute;
 		}
 		
-		random = rand()%25;
-		hour = random - hour;
+		hour = rand() % 25;
+		ref = rand() % 25;
+		hour = ref - hour;
 		if(hour < 0){
 			hour = -1;
 		}
-		
-	}while(hour != -1);
-	printf("Lowest temperature: %2.1f at %2ih %i2min\n", (*lowTemp), hourRefTemp, minuteRefTemp);
-	printf("Lowest humidity: %2.1f at %2ih %i2min\n", (*lowHumid), hourRefHu, minuteRefHu);
+	}
+	
+	printf("Lowest temperature: %2.1f at %ih %imin\n", (*lowTemp), hourRefTemp, minuteRefTemp);
+	printf("Lowest humidity: %2.1f at %ih %imin\n", (*lowHumid), hourRefHu, minuteRefHu);
 	
 	return;
 }
