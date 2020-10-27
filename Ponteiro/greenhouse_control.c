@@ -28,8 +28,8 @@ void aSensor(float *lowTemp, float *lowHumid);
 int main(void){
 	float lowTemp, lowHumid, minTemp, minHu;
 	int count=1, lowTempSensor, lowHumidSensor;
-	
-	srand(time(NULL));
+	// srand was used in order to generate random inputs in to sensors
+	srand(time(NULL)); 
    
 	lowTemp = lowHumid = minTemp = minHu = -1;
 	
@@ -39,19 +39,22 @@ int main(void){
 		if(minTemp == -1){
 			minTemp = lowTemp;
 			lowTempSensor = count;
+		}else{
+			if(lowTemp < minTemp){
+				minTemp = lowTemp;
+				lowTempSensor = count;
+			}
 		}
 		if(minHu == -1){
 			minHu = lowHumid;
 			lowHumidSensor = count;
+		}else{
+			if(lowHumid < minHu){
+				minHu = lowHumid;
+				lowHumidSensor = count;
+			}
 		}
-		if(lowTemp < minTemp){
-			minTemp = lowTemp;
-			lowTempSensor = count;
-		}
-		if(lowHumid < minHu){
-			minHu = lowHumid;
-			lowHumidSensor = count;
-		}
+				
 		count++;
 		lowTemp = lowHumid = -1;
 	}
@@ -71,29 +74,34 @@ void aSensor(float *lowTemp, float *lowHumid){
 	hour = rand() % 25;
 	while(hour != -1){
 		minute = rand() % 61;
+		/* many rands was used in temp and humidity variables in order to get different of zero 
+		 * or very low values */
 		temp = (rand()%31) + (rand()%37) + (rand()%41);
-		printf("temp %.1f\n", temp);
-		humidity = (rand()%61) + (rand()%67) + (rand()%71);
-		printf("humidity %.1f\n", humidity);
+		humidity = (rand()%31) + (rand()%37) + (rand()%71);
+		if(humidity > 100){
+			humidity = 100;
+		}
 		if((*lowTemp) == -1){
 			(*lowTemp) = temp;
 			hourRefTemp = hour;
 			minuteRefTemp = minute;
+		}else{
+			if(temp < (*lowTemp)){
+				(*lowTemp)=temp;
+				hourRefTemp = hour;
+				minuteRefTemp = minute;
+			}
 		}
 		if((*lowHumid) == -1){
 			(*lowHumid) = humidity;
 			hourRefHu = hour;
 			minuteRefHu = minute;
-		}
-		if(temp < (*lowTemp)){
-			(*lowTemp)=temp;
-			hourRefTemp = hour;
-			minuteRefTemp = minute;
-		}
-		if(humidity < (*lowHumid)){
-			(*lowHumid)=humidity;
-			hourRefHu = hour;
-			minuteRefHu = minute;
+		}else{
+			if(humidity < (*lowHumid)){
+				(*lowHumid)=humidity;
+				hourRefHu = hour;
+				minuteRefHu = minute;
+			}
 		}
 		
 		hour = rand() % 25;
