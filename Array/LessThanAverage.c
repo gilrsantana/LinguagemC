@@ -1,5 +1,5 @@
 /*
- * Show how many array's values are less than the average of array's values
+ * Show how many array's values are smaller than the average of array's values
  */
  
  
@@ -48,7 +48,7 @@ void creatArray(int size){
 	printf("\n");
 	average = calcAverage(array1, size);
 	count = lessValue(array1, size, average);
-	printf("\nThe array has %d values less than array's average (%.1f)\n\n", count, average);
+	printf("\nThe array has %d values smaller than array's average (%.1f)\n\n", count, average);
 	
 	return;
 }
