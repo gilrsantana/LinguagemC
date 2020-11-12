@@ -22,24 +22,24 @@ void atualizaData(int vetor1[], int vetor2[]){
 
 int main(void){
 
-	int data[3]; //{dd, mm, aaaa}
-	int calendario[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	int vData[3]; //{dd, mm, aaaa}
+	int vCalendario[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 	printf("Informe o dia: ");
-	scanf("%i", &data[0]);
+	scanf("%i", &vData[0]);
 	printf("Informe o mês: ");
-	scanf("%i", &data[1]);
+	scanf("%i", &vData[1]);
 	printf("Informe o ano: ");
-	scanf("%i", &data[2]);
+	scanf("%i", &vData[2]);
 
-	if(data[2]%4==0 || data[2]%400==0){
-		calendario[1] = 29;
+	if(vData[2]%4==0 || vData[2]%400==0){
+		vCcalendario[1] = 29;
 	}
 
-	if(data[0] > calendario[data[1]-1] || data[1] > 12 || data[2] > 2100){
+	if(data[0] > vCalendario[vData[1]-1] || vData[1] > 12 || vDdata[2] > 2100){
 		printf("Data inválida\n");
 	}else{
-		atualizaData(data, calendario);
+		atualizaData(vData, vCalendario);
 	}
 
 	return 0;
