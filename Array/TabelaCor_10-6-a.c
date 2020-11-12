@@ -37,5 +37,3 @@ void preencheArray(int referencia, int array[]){
 	
 	return;
 }
-
-
