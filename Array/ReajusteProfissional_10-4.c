@@ -37,7 +37,7 @@ void aSolution(void){
 	 * category 50 - position 4
 	 * category 60 - position 5
 	 */
-	float adjustment[SIZE] = { 1.06, 1.08, 1.075, 1.0695, 1.072, 1.063 };
+	float vAdjustment[SIZE] = { 1.06, 1.08, 1.075, 1.0695, 1.072, 1.063 };
 	int profReg, category;
 	float salary, newSalary;
 
@@ -49,7 +49,7 @@ void aSolution(void){
 		printf("Enter your professional category: ");
 		scanf("%i", &category);
 		if(category <= 60 && category >= 10 && category%10==0){
-			newSalary = salary * (adjustment[REF(category)]);
+			newSalary = salary * (vAdjustment[REF(category)]);
 		}else{
 			newSalary = salary;
 		}
@@ -68,8 +68,8 @@ void aSolution(void){
 
 ////////////////////////////////////////////////
 void bSolution(void){
-	int catCod[SIZE] = {11, 23, 27, 8, 41, 55};
-	float adjustment[SIZE] = { 1.06, 1.08, 1.075, 1.0695, 1.072, 1.063 };
+	int vCatCod[SIZE] = {11, 23, 27, 8, 41, 55};
+	float vAdjustment[SIZE] = { 1.06, 1.08, 1.075, 1.0695, 1.072, 1.063 };
 	int profReg, category, position;
 	float salary, newSalary;
 
@@ -80,9 +80,9 @@ void bSolution(void){
 		scanf("%f", &salary);
 		printf("Enter your professional category: ");
 		scanf("%i", &category);
-		position = verifyCod(catCod, category);
+		position = verifyCod(vCatCod, category);
 		if(position >= 0){
-			newSalary = salary * (adjustment[position]);
+			newSalary = salary * (vAdjustment[position]);
 		}else{
 			newSalary = salary;
 		}
