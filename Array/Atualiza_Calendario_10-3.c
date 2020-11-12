@@ -33,10 +33,10 @@ int main(void){
 	scanf("%i", &vData[2]);
 
 	if(vData[2]%4==0 || vData[2]%400==0){
-		vCcalendario[1] = 29;
+		vCalendario[1] = 29;
 	}
 
-	if(data[0] > vCalendario[vData[1]-1] || vData[1] > 12 || vDdata[2] > 2100){
+	if(vData[0] > vCalendario[vData[1]-1] || vData[1] > 12 || vData[2] > 2100){
 		printf("Data inválida\n");
 	}else{
 		atualizaData(vData, vCalendario);
