@@ -14,14 +14,14 @@ int main(void){
  * CURSO 29,30,31,32 -> dia 14
  * CURSO 33,34       -> dia 15
  */
- 
-	int agenda[9];
+
+	int vAgenda[9];
 	int matricula;
 	int curso;
 	int diaMatricula;
-	
-	preencheArray(agenda);
-	
+
+	preencheArray(vAgenda);
+
 	printf("Informe a matrícula ou 0 para sair do programa: ");
 	scanf("%i", &matricula);
 	while(matricula > 0){
@@ -36,19 +36,19 @@ int main(void){
 				diaMatricula = curso/4;
 			}
 			printf("Aluno %d, o dia de matrícula do curso ", matricula);
-			printf("(%d) é %d de janeiro.\n\n", curso, agenda[diaMatricula]);
+			printf("(%d) é %d de janeiro.\n\n", curso, vAgenda[diaMatricula]);
 		}
 		printf("Informe a matrícula ou 0 para sair do programa: ");
 		scanf("%i", &matricula);
 	}
-	
+
 	return 0;
 }
 
 void preencheArray(int array[]){
 	int i = 0;
 	int dia = 6;
-	
+
 	for(;i <= 15; i++){
 		if(dia == 12){
 			dia++;
