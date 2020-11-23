@@ -1,43 +1,57 @@
 /*
- * Escreva um programa que imprime na tela um menu simulando as seguintes operações em um caixa eletrônico
- * de um banco: "Digite a opcao da operacao que deseja fazer:
- * 1 para ver o saldo atual da conta,
- * 2 para fazer um deposito;
- * 3 para fazer um saque.
- * 4  para finalizar
- * Inicialmente, seu programa deve solicitar ao usuário como entrada, via teclado, sua conta e o saldo
- * inicial da conta.
- * Após o saldo fornecido, o programa deve imprimir o menu acima e executar a opção selecionada até a 
- * opção 4 ser digitada.
- * Após o término da execução de cada  operação de depósito e saque, o saldo atual deve ser impresso.
+ * Escreva um programa que imprime na tela um menu simulando as seguintes operações em um caixa 
+ * eletrônico de um banco: 
+ * "Digite a opcao da operacao que deseja fazer:
+ * 				1 para ver o saldo atual da conta,
+ * 				2 para fazer um deposito;
+ * 				3 para fazer um saque.
+ * 				4  para finalizar
+ * 
+ * Inicialmente, seu programa deve solicitar ao usuário como entrada, via teclado, sua conta e 
+ * o saldo inicial da conta.
+ * 
+ * Após o saldo fornecido, o programa deve imprimir o menu acima e executar a opção selecionada 
+ * até a opção 4 ser digitada.
+ * 
+ * Após o término da execução de cada  operação de depósito e saque, o saldo atual deve ser 
+ * impresso.
+ * 
  * Obrigatoriamente, seu programa deve definir uma função para o menu.
- * resp_menu: A função  mostra as opções do menu, captura e valida a opção escolhida, retornando-a
+ * 
+ * função:
+ * 		resp-menu: A função  mostra as opções do menu, captura e valida a opção escolhida, 
+ * retornando-a
+ * 
  * MODIFIQUE seu programa para processar vários clientes. Término: conta == 0
  */
 
 #include <stdio.h>
 
-#define INICIAL_MINIMO 20.00 // Valor mínimo para abertura de conta
-int menu();// Mostra opções de menu e retorna com uma opção
-int validarConta();// Valida a conta com o parâmetro de 3 dígitos
-float depositoInicial();// Inicia a conta com um depósito inicial mínimo 
-float realizarDeposito(float valor);// Realiza depósito em uma conta já criada
-float realizarSaque(float valor);// Realiza saque em uma conta já criada
+#define INICIAL_MINIMO 20.00            // Valor mínimo para abertura de conta
+#define TAM 1000
+
+void preencheArray(float v[], float ref); // Preenche o vetor com valor 0.00
+int menu();                             // Mostra opções de menu e retorna com uma opção
+int validarConta();                     // Valida a conta com o parâmetro de 3 dígitos
+float depositoInicial();                // Inicia a conta com um depósito inicial mínimo 
+float realizarDeposito(float valor);    // Realiza depósito em uma conta já criada
+float realizarSaque(float valor);       // Realiza saque em uma conta já criada
 
 int main(void){
-    float conta[1000]={0.0};
-    float depInicial, saldo, novoSaldo, saque, deposito;
-    int codigo, operacao, inicial, continuar = 1, opcao;
+    float vConta[TAM];
+    int codigo, operacao, continuar = 1, opcao;
+    
+    preencheArray(vConta, 0.00);
 
     printf("*********************************\n");
     printf("* BEM VINDO AO SISTEMA BANCÁRIO *\n");
     printf("*********************************\n\n");
     codigo = validarConta();
-    conta[codigo] = depositoInicial();
-    if(conta[codigo] == 0){
+    vConta[codigo] = depositoInicial();
+    if(vConta[codigo] == 0){
         printf("A conta %i não foi iniciada\n", codigo);
     }else{
-        printf("A conta %i foi iniciada com o valor de R$ %.2f.\n\n", codigo, conta[codigo]);
+        printf("A conta %i foi iniciada com o valor de R$ %.2f.\n\n", codigo, vConta[codigo]);
     }
     
     do{
@@ -55,15 +69,15 @@ int main(void){
                 printf("*   SESSÃO DE CRIAÇÃO DE CONTA    *\n");
                 printf("***********************************\n");
                 codigo = validarConta();
-                if(conta[codigo] != 0){
+                if(vConta[codigo] != 0){
                     printf("A conta %i já foi criada. Informe outra\n", codigo);
                 }else{
-                    conta[codigo] = depositoInicial();
-                    if(conta[codigo] < INICIAL_MINIMO){
+                    vConta[codigo] = depositoInicial();
+                    if(vConta[codigo] < INICIAL_MINIMO){
                         printf("A conta não foi iniciada. Faça um depósito mínimo de R$ %.2f\n", INICIAL_MINIMO);
-                        conta[codigo] = 0.0;
+                        vConta[codigo] = 0.0;
                     }else{
-                        printf("A conta %i foi iniciada com o valor de R$ %.2f.\n", codigo, conta[codigo]);
+                        printf("A conta %i foi iniciada com o valor de R$ %.2f.\n", codigo, vConta[codigo]);
                     }
                 }
                 
@@ -77,7 +91,7 @@ int main(void){
             printf("* SESSÃO DE MOVIMENTAÇÃO DE CONTA *\n");
             printf("***********************************\n");
             codigo = validarConta();
-            if(conta[codigo] == 0){
+            if(vConta[codigo] == 0){
                 printf("A conta %i não foi iniciada\n", codigo);
             }else{
                 do{
@@ -85,17 +99,17 @@ int main(void){
 
                     switch(operacao){
                     case 1:
-                        printf("A conta %i tem o saldo de R$ %.2f\n", codigo, conta[codigo]);
+                        printf("A conta %i tem o saldo de R$ %.2f\n", codigo, vConta[codigo]);
                         break;
 
                     case 2:
-                        conta[codigo] = realizarDeposito(conta[codigo]);
-                        printf("O novo saldo da conta %i é R$ %.2f\n", codigo, conta[codigo]);
+                        vConta[codigo] = realizarDeposito(vConta[codigo]);
+                        printf("O novo saldo da conta %i é R$ %.2f\n", codigo, vConta[codigo]);
                         break;
                         
                     case 3:
-                        conta[codigo] = realizarSaque(conta[codigo]);
-                        printf("O saldo da conta %i é R$ %.2f\n", codigo, conta[codigo]);
+                        vConta[codigo] = realizarSaque(vConta[codigo]);
+                        printf("O saldo da conta %i é R$ %.2f\n", codigo, vConta[codigo]);
                         break;
 
                     case 0:
@@ -118,6 +132,15 @@ int main(void){
 
     return 0;
 }
+
+void preencheArray(float v[], float ref){
+	
+	for(int i = 0; i < TAM; i++){
+		v[i] = ref;
+	}
+}
+
+
 // Mostra opções de menu e retorna com uma opção
 int menu(){
     int item;
