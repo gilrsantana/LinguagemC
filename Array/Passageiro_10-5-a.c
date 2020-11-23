@@ -21,9 +21,9 @@ int main(void){
      * Companhia 21 -> Sala 2
      */
 
-    int companhia[SIZE] = {0};
+    int vCompanhia[SIZE] = {0};
     int opcao;
- 
+
     printf("Informe a opção:\n");
     printf("0 - Sair do programa\n");
     printf("1 - Cadastrar Cia Aérea\n");
@@ -33,10 +33,10 @@ int main(void){
     while(opcao > 0){
         switch(opcao){
             case 1:
-                insereCompanhia(companhia);
+                insereCompanhia(vCompanhia);
                 break;
             case 2:
-                associaBagagem(companhia);
+                associaBagagem(vCompanhia);
         }
 
         printf("Informe outra opção:\n");
@@ -74,7 +74,7 @@ void insereCompanhia(int array[]){
         printf("Espaço esgotado\n\n");
         codigo = 0;
     }
-    
+
     return;
 }
 
@@ -82,10 +82,10 @@ void insereCompanhia(int array[]){
 void associaBagagem(int array[]){
 	int bilhete, mala, local;
 	int perdida = 1;
-	
+
 	if(array[0] == 0){
 		printf("Não há Companhia aérea cadastrada no sistema\n\n");
-	}else{		
+	}else{
 		printf("Informe o número (4 dígitos) do bilhete ou 0 para sair: ");
 		scanf("%i", &bilhete);
 		while(bilhete > 0){
@@ -106,7 +106,7 @@ void associaBagagem(int array[]){
 			scanf("%i", &bilhete);
 		}
 	}
-    
+
 	return;
 }
 //////////////////////////////////////////////////////////////////

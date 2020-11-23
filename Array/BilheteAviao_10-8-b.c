@@ -2,10 +2,10 @@
 
 #define SIZE 8
 
-void preencheArray(int codigo[], int assento[], float valor[]);
-void compraBilhete(int array1[], float array2[], int ref, int codigo[]);
+void preencheArray(int vCodigo[], int vAssento[], float vValor[]);
+void compraBilhete(int array1[], float array2[], int ref, int vCodigo[]);
 int avaliaTarifa(int array[]);
-int verificaPosicao(int codigo[], int ref);
+int verificaPosicao(int vCodigo[], int ref);
 
 int main(void){
     /*
@@ -19,19 +19,19 @@ int main(void){
      * CÓDIGO 16 - Posição 7
      */
     int tarifa;
-    int bancoTarifa[SIZE] = {17,48,10,21,96,55,23,16};
-    int assento[SIZE];
-    float valor[SIZE];
+    int vBancoTarifa[SIZE] = {17,48,10,21,96,55,23,16};
+    int vAssento[SIZE];
+    float vValor[SIZE];
 
-    preencheArray(bancoTarifa, assento, valor);
-    tarifa = avaliaTarifa(bancoTarifa);
-    
+    preencheArray(vBancoTarifa, vAssento, vValor);
+    tarifa = avaliaTarifa(vBancoTarifa);
+
     while(tarifa != 0){
         if(tarifa == -1){
-			tarifa = avaliaTarifa(bancoTarifa);
+			tarifa = avaliaTarifa(vBancoTarifa);
 		}else{
-			compraBilhete(assento, valor, tarifa, bancoTarifa);
-			tarifa = avaliaTarifa(bancoTarifa);
+			compraBilhete(vAssento, vValor, tarifa, vBancoTarifa);
+			tarifa = avaliaTarifa(vBancoTarifa);
 		}
     }
 
@@ -39,23 +39,23 @@ int main(void){
 }
 
 ///////////////////////////////////////////////////////////
-void preencheArray(int codigo[], int assento[], float valor[]){
+void preencheArray(int vCodigo[], int vAssento[], float vValor[]){
     for(int i = 0; i < SIZE; i++){
-        printf("Informe o valor da tarifa %i: ", codigo[i]);
-        scanf("%f", &valor[i]);
-        printf("Informe a quantidade disponível da tarifa %i: ", codigo[i]);
-        scanf("%i", &assento[i]);
+        printf("Informe o valor da tarifa %i: ", vCodigo[i]);
+        scanf("%f", &vValor[i]);
+        printf("Informe a quantidade disponível da tarifa %i: ", vCodigo[i]);
+        scanf("%i", &vAssento[i]);
     }
     return;
 }
 
 ///////////////////////////////////////////////////////////
-void compraBilhete(int array1[], float array2[], int ref, int codigo[]){
+void compraBilhete(int array1[], float array2[], int ref, int vCodigo[]){
     int qtd;
     int pos;
     float compra;
 
-    pos = verificaPosicao(codigo, ref);
+    pos = verificaPosicao(vCodigo, ref);
     if(array1[pos] == 0){
         printf("\nNão há assentos disponíveis\n");
     }else{
@@ -91,9 +91,9 @@ int avaliaTarifa(int array[]){
     return -1;
 }
 ///////////////////////////////////////////////////////////
-int verificaPosicao(int codigo[], int ref){
+int verificaPosicao(int vCodigo[], int ref){
     for(int i = 0; i < SIZE; i++){
-		if(ref == codigo[i]){
+		if(ref == vCodigo[i]){
 			return i;
 		}
 	}

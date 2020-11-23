@@ -4,55 +4,60 @@
 
 int validaConta(int array[], int ref);
 void criarConta(int array[], int ref, int controle);
-void operaConta(int nome[], int ref, float valor[]);
+void operaConta(int vNome[], int ref, float vValor[]);
 int encontraIndice(int array[], int ref);
+void inicializaConta(int vConta[]);
+void inicializaSaldo(float vSaldo[]);
 
 int main(void){
     int opcao, num, aceito;
     int i = 0;
-    int conta[SIZE] = {0};
-    float saldo[SIZE] = {0.0};
+    int vConta[SIZE];
+    float vSaldo[SIZE];
 
-    printf("Informe a opção desejada\n");
+    inicializaConta(vConta);
+    inicializaSaldo(vSaldo);
+
+    printf("Informe a opÃ§Ã£o desejada\n");
     printf("0 - Sair do programa.\n");
     printf("1 - Criar conta.\n");
-    printf("2 - Realizar operação.\n");
-    printf("OPÇÃO: ");
+    printf("2 - Realizar operaÃ§Ã£o.\n");
+    printf("OPÃ‡ÃƒO: ");
     scanf("%i", &opcao);
 
     while(opcao == 1 || opcao == 2){
         switch(opcao){
         case 1:
-            printf("\nInforme o número da conta1: ");
+            printf("\nInforme o nÃºmero da conta1: ");
             scanf("%i", &num);
-            aceito = validaConta(conta, num);
+            aceito = validaConta(vConta, num);
             if(aceito != 0){
-                criarConta(conta, aceito, i);
-                printf("PARABÉNS\n");
-                printf("Conta %i criada com sucesso\n\n", conta[i]);
+                criarConta(vConta, aceito, i);
+                printf("PARABÃ‰NS\n");
+                printf("Conta %i criada com sucesso\n\n", vConta[i]);
                 i++;
             }else{
                 printf("\nERRO!!!\n");
-                printf("Conta já existe.\n\n");
+                printf("Conta jÃ¡ existe.\n\n");
             }
             break;
         case 2:
-            printf("\nInforme o número da conta: ");
+            printf("\nInforme o nÃºmero da conta: ");
             scanf("%i", &num);
-            aceito = validaConta(conta, num);
+            aceito = validaConta(vConta, num);
             if(aceito == 0){
-                operaConta(conta, num, saldo);
+                operaConta(vConta, num, vSaldo);
             }else{
                 printf("\nERRO!!!\n");
-                printf("Conta não encontrada.\n\n");
+                printf("Conta nÃ£o encontrada.\n\n");
             }
             break;
         }
-        printf("Informe a opção desejada:\n");
+        printf("Informe a opÃ§Ã£o desejada:\n");
         printf("0 - Sair do programa.\n");
         printf("1 - Criar conta.\n");
-        printf("2 - Realizar operação.\n");
-        printf("OPÇÃO: ");
+        printf("2 - Realizar operaÃ§Ã£o.\n");
+        printf("OPÃ‡ÃƒO: ");
         scanf("%i", &opcao);
     }
 
@@ -76,34 +81,34 @@ void criarConta(int array[], int ref, int controle){
 }
 
 //////////////////////////////////////////////////////////
-void operaConta(int nome[], int ref, float valor[]){
+void operaConta(int vNome[], int ref, float vValor[]){
     int indice, op;
     float quantia;
-    indice = encontraIndice(nome, ref);
+    indice = encontraIndice(vNome, ref);
 
-    printf("Selecione a operação desejada\n");
+    printf("Selecione a operaÃ§Ã£o desejada\n");
     printf("1 - Sacar ou Depositar valor.\n");
     printf("2 - Verificar Saldo.\n");
     scanf("%i", &op);
     while(op == 1 || op == 2){
         if(op == 1){
-            printf("Informe um valor + para depósito ou - para saque: ");
+            printf("Informe um valor + para depÃ³sito ou - para saque: ");
             scanf("%f", &quantia);
-            if( (quantia + valor[indice]) >= 0 ){
-                valor[indice]+=quantia;
+            if( (quantia + vValor[indice]) >= 0 ){
+                vValor[indice]+=quantia;
             }else{
                 printf("Saldo insuficiente\n\n");
             }
         }else{
-            printf("O saldo da conta %i é = R$ %.2f\n\n", ref, valor[indice]);
+            printf("O saldo da conta %i Ã© = R$ %.2f\n\n", ref, vValor[indice]);
         }
-        printf("Selecione a operação desejada\n");
-        printf("0 - Sair da seção.\n");
+        printf("Selecione a operaÃ§Ã£o desejada\n");
+        printf("0 - Sair da seÃ§Ã£o.\n");
         printf("1 - Sacar ou Depositar valor.\n");
         printf("2 - Verificar Saldo.\n");
         scanf("%i", &op);
     }
-
+    return;
 }
 
 //////////////////////////////////////////////////////////
@@ -112,6 +117,21 @@ int encontraIndice(int array[], int ref){
         if(ref == array[i]){
             return i;
         }
+    }
+    return -1;
+}
+
+//////////////////////////////////////////////////////////
+void inicializaConta(int vConta[]){
+    for(int i = 0; i < SIZE; i++){
+        vConta[i] = 0;
+    }
+}
+
+//////////////////////////////////////////////////////////
+void inicializaSaldo(float vSaldo[]){
+    for(int i = 0; i < SIZE; i++){
+        vSaldo[i] = 0.0;
     }
 }
 //////////////////////////////////////////////////////////

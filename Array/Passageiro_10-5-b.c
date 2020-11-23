@@ -5,6 +5,7 @@
 
 void insereCompanhia(int array[]);
 void associaBagagem(int array[]);
+void inicializaArray(int array[]);
 
 int main(void){
     /*
@@ -40,18 +41,19 @@ int main(void){
      * Companhia 39 -> Sala 5
      */
 
-    int companhia[SIZE] = {0};
+    int vCompanhia[SIZE];
     int opcao;
- 
-	insereCompanhia(companhia);
+
+    inicializaArray(vCompanhia);
+	insereCompanhia(vCompanhia);
     printf("Informe a opção:\n");
     printf("0 - Sair do programa\n");
     printf("2 - Procurar bagagem\n");
     printf("opção: ");
     scanf("%i", &opcao);
     while(opcao == 2){
-        
-        associaBagagem(companhia);
+
+        associaBagagem(vCompanhia);
 
         printf("Informe outra opção:\n");
         printf("0 - Sair do programa\n");
@@ -62,20 +64,20 @@ int main(void){
 
     return 0;
 }
-
+/////////////////////////////////////////////////////////
 void insereCompanhia(int array[]){
-    
+
     for(int i = 0; i < SIZE; i++){
 		array[i] = MINIMO + i;
 	}
-    
+
     return;
 }
-
+/////////////////////////////////////////////////////////
 void associaBagagem(int array[]){
 	int bilhete, mala, local;
 	int perdida = 1;
-		
+
 	printf("Informe o número (4 dígitos) do bilhete ou 0 para sair: ");
 	scanf("%i", &bilhete);
 	while(bilhete > 0){
@@ -95,7 +97,14 @@ void associaBagagem(int array[]){
 		printf("Informe o número (4 dígitos) do bilhete ou 0 para sair: ");
 		scanf("%i", &bilhete);
 	}
-	    
+
 	return;
 }
+/////////////////////////////////////////////////////////
+void inicializaArray(int array[]){
+    for(int i = 0; i < SIZE; i++){
+        array[i] = 0;
+    }
+}
+/////////////////////////////////////////////////////////
 
