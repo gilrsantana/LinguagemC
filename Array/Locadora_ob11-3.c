@@ -67,8 +67,6 @@ void preencheArray(int v[], int valor){
 	for(int i = 0; i < valor; i++){
 		v[i] = 0;
 	}
-	
-	
 }
 
 ///////////////////////////////////////////////////////
